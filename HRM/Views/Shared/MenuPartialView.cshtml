@@ -1,0 +1,40 @@
+﻿<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="@Url.Content("~/")"><i class="fa fa-dashboard fa-fw"></i> Trang Chủ</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Hệ Thống <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        @Html.ActionLink("Công ty", "Index", "Organization")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Bộ phận", "Index", "Department")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Chức vụ", "Index", "Position")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Quy cách", "Index", "Specification")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Hệ số", "Index", "Coefficient")
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-table fa-fw"></i> Danh Mục <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="">Đơn giá bộ phận</a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Sản phẩm", "Index", "Product")
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
