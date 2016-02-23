@@ -59,18 +59,10 @@
 
         <div id="page-wrapper" style="padding: 0 0px;">
             <div class="container-fluid" style="padding-left: 0px; padding-right: 0px">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Basic Tabs
-                    </div>
-                    <div class="panel-body">
-                        <ul id="iframeTab" class="nav nav-tabs">
-                        </ul>
-                        <div id="iframeContent" class="tab-content">
-                        </div>
-                        @RenderBody()
-                    </div>
+                <ul id="iframeTab" class="nav nav-tabs"></ul>
+                <div id="iframeContent" class="tab-content">
                 </div>
+                @RenderBody()
             </div>
             <!-- /.container-fluid -->
         </div>
