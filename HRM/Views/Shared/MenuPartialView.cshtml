@@ -2,25 +2,22 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a href="@Url.Content("~/")"><i class="fa fa-dashboard fa-fw"></i> Trang Chủ</a>
-            </li>
-            <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Hệ Thống <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        @Html.ActionLink("Công ty", "Index", "Organization")
+                        @Html.ActionLink("Công ty", "Index", "Organization", null, new { @data_name = "Công ty", @data_iframe = "Organization" })
                     </li>
                     <li>
-                        @Html.ActionLink("Bộ phận", "Index", "Department")
+                        @Html.ActionLink("Bộ phận", "Index", "Department", null, new { @data_name = "Bộ phận", @data_iframe = "Department" })
                     </li>
                     <li>
-                        @Html.ActionLink("Chức vụ", "Index", "Position")
+                        @Html.ActionLink("Chức vụ", "Index", "Position", null, new { @data_name = "Chức vụ", @data_iframe = "Position" })
                     </li>
                     <li>
-                        @Html.ActionLink("Quy cách", "Index", "Specification")
+                        @Html.ActionLink("Quy cách", "Index", "Specification", null, new { @data_name = "Quy cách", @data_iframe = "Specification" })
                     </li>
                     <li>
-                        @Html.ActionLink("Hệ số", "Index", "Coefficient")
+                        @Html.ActionLink("Hệ số", "Index", "Coefficient", null, new { @data_name = "Hệ số", @data_iframe = "Coefficient" })
                     </li>
                 </ul>
             </li>
@@ -28,10 +25,10 @@
                 <a href="#"><i class="fa fa-table fa-fw"></i> Danh Mục <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="">Đơn giá bộ phận</a>
+                        @Html.ActionLink("Đơn giá bộ phận", "Index", "UnitPrice", null, new { @data_name = "Đơn giá bộ phận", @data_iframe = "UnitPrice" })
                     </li>
                     <li>
-                        @Html.ActionLink("Sản phẩm", "Index", "Product")
+                        @Html.ActionLink("Sản phẩm", "Index", "Product", null, new { @data_name = "Sản phẩm", @data_iframe = "Product" })
                     </li>
                 </ul>
             </li>
