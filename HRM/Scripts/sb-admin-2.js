@@ -21,6 +21,7 @@ $(function () {
         if (height < 1) height = 1;
         if (height > topOffset) {
             $("#page-wrapper").css("min-height", (height) + "px");
+            $("#iframeContent").css("min-height", (height - 51) + "px");
         }
     });
     var url = window.location;
@@ -50,7 +51,7 @@ $(function () {
                 $(li).append(a);
                 $(tab).append(li);
 
-                var iframe = $("<iframe width='100%' height='100%'></iframe>");
+                var iframe = $("<iframe width='100%' height='" + (height - 51) + "'></iframe>");
                 var divContent = $("<div class='tab-pane fade active in' id='" + id + "'>");
                 $(iframe).attr('src', href);
                 $(divContent).append(iframe);
