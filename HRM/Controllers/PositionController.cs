@@ -114,15 +114,13 @@ namespace HRM.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteMultiPosition(string ids)
+        public ActionResult DeleteMultiPosition(int[] ids)
         {
             try
             {
                 var db = new HRMContext();
-                var lstId = ids.Split(',');
-                foreach (string item in lstId)
+                foreach (var id in ids)
                 {
-                    var id = int.Parse(item);
                     var entity = db.dChucVus.FirstOrDefault(x => x.id == id);
                     if (entity != null)
                     {

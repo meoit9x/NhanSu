@@ -74,7 +74,7 @@
             },
             type: "POST",
             success: function (result) {
-                if (result.status == true) {
+                if (result.Status == true) {
                     alert("Xóa chức vụ thành công !");
                     self.RefreshTableUser($(self.positionTable), Config.Url + 'Position/GetAllPosition');
                 }
@@ -119,7 +119,7 @@
                 },
                 type: "POST",
                 success: function (result) {
-                    if (result.status == true) {
+                    if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
                         self.RefreshTableUser($(self.positionTable), '/Position/GetAllPosition');
                         $("#positionModal").modal('hide');
@@ -136,7 +136,7 @@
                 },
                 type: "POST",
                 success: function (result) {
-                    if (result.status == true) {
+                    if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
                         self.RefreshTableUser($(self.positionTable), '/Position/GetAllPosition');
                         $("#positionModal").modal('hide');
@@ -197,7 +197,7 @@
                     data: { 'id': id },
                     type: "POST",
                     success: function (result) {
-                        if (result.status == true) {
+                        if (result.Status == true) {
                             $.gritter.add({ title: "Chức vụ", text: "Xóa chức vụ thành công !", image: "/Images/success.png", class_name: "clean", time: "1500" });
                             self.RefreshTableUser($(self.positionTable), Config.Url + 'Position/GetAllPosition');
                         }
@@ -217,7 +217,7 @@
             data: { 'id': id },
             type: "Get",
             success: function (result) {
-                if (result.status == true) {
+                if (result.Status == true) {
                     $("#hdId").val(id);
                     $('#txtCode').val(result.data.machucvu);
                     $('#txtName').val(result.data.tenchucvu);
