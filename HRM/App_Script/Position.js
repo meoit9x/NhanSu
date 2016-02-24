@@ -4,6 +4,8 @@
     self.positionTable = $("#position");
     self.table = {};
     self.rows_selected = [];
+
+    // chạy khi page nó load
     self.init = function () {
         self.table = $(self.positionTable).DataTable({
             "bDestroy": true,
@@ -69,13 +71,16 @@
         $.ajax({
             url: Config.Url + 'Position/DeleteMultiPosition',
             async: false,
+            traditional: true,
             data: {
-                ids: self.rows_selected.toString()
+                ids: self.rows_selected
             },
+            dataType : "json",
             type: "POST",
             success: function (result) {
                 if (result.Status == true) {
                     alert("Xóa chức vụ thành công !");
+                    self.rows_selected = [];
                     self.RefreshTableUser($(self.positionTable), Config.Url + 'Position/GetAllPosition');
                 }
             }
@@ -121,6 +126,7 @@
                 success: function (result) {
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
+
                         self.RefreshTableUser($(self.positionTable), '/Position/GetAllPosition');
                         $("#positionModal").modal('hide');
                     }
@@ -155,7 +161,7 @@
         // Get row data
         var data = self.table.row($row).data();
         // Get row ID
-        var rowId = data["Id"];
+        var rowId = data["id"];
 
         // Determine whether row ID is in the list of selected row IDs
         var index = $.inArray(rowId, self.rows_selected);

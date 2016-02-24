@@ -126,9 +126,8 @@ namespace HRM.Controllers
                     {
                         entity.isDelete = true;
                     }
+                    db.SaveChanges();
                 }
-
-                db.SaveChanges();
 
                 return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
             }
