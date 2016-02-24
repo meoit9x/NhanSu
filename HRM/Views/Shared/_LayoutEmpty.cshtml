@@ -15,6 +15,10 @@
     <link href="~/Content/sb-admin-2.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/jquery.gritter.css" rel="stylesheet" />
+
+    <link href="~/Content/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.responsive.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container-fluid">
@@ -22,11 +26,31 @@
     </div>
     <!-- jQuery -->
     <script src="~/Scripts/jquery.js"></script>
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/modal.js"></script>
+
+    <!-- dataTables Core JavaScript -->
+    <script src="~/Scripts/jquery.dataTables.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/dataTables.responsive.js"></script>
+
+    <script src="~/Scripts/jquery.gritter.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
     <!-- Morris Charts JavaScript -->
     <script src="~/Scripts/metisMenu.min.js"></script>
     <script src="~/Scripts/sb-admin-2.js"></script>
-    @RenderSection("scripts", required: false)
+    
+
+    <script type="text/javascript">
+        var Config = {
+            Url: ""
+        };
+
+        Config.Url = '@Url.Content("~/")'
+    </script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

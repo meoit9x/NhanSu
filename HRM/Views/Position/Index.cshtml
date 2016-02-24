@@ -1,14 +1,26 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
 
+@section Scripts{
+    <script src="~/App_Script/Position.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var position = new Position();
+            position.init();
+        });
+    </script>
+}
+
+<input type="button" id="addPosition" class="btn btn-primary" value="Thêm mới">
+<input type="button" id="deletePosition" class="btn btn-danger" value="Xóa">
 <div class="table-responsive">
     <table id="position" class="table">
         <thead>
             <tr>
                 <th>#</th>
+                <th>Mã chức vụ</th>
                 <th>Chức vụ</th>
                 <th></th>
             </tr>
@@ -24,21 +36,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Chức vụ</h4>
+                <h4 class="modal-title" id="title">Chức vụ</h4>
             </div>
             <div class="modal-body" style="padding:10px" id="modalCustomer">
-                <div class="form-group"> 
-                    <label for="machucvu" class="control-label">Mã chức vụ</label> 
-                    <input type="text" class="form-control" id="machucvu"> 
+                <div class="form-group">
+                    <label for="txtCode" class="control-label">Mã chức vụ</label>
+                    <input type="text" class="form-control" id="txtCode">
                 </div>
                 <div class="form-group">
-                    <label for="tenchucvu" class="control-label">Tên chức vụ</label>
-                    <input type="text" class="form-control" id="tenchucvu">
+                    <label for="txtName" class="control-label">Tên chức vụ</label>
+                    <input type="text" class="form-control" id="txtName">
                 </div>
             </div>
-            <div class="modal-footer"> 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button> 
-                <button type="button" class="btn btn-primary">Lưu</button> 
+            <div class="modal-footer">
+                <input type="hidden" id="hdId" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                <button type="button" id="savePosition" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </div>

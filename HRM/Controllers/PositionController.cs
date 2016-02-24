@@ -22,7 +22,7 @@ namespace HRM.Controllers
         public ActionResult GetAllPosition()
         {
             var db = new HRMContext();
-            var lstChucVu = db.dChucVus.ToList();
+            var lstChucVu = db.dChucVus.Where(x => x.isDelete != true).ToList();
             return Json(new { data = lstChucVu, Status = true }, JsonRequestBehavior.AllowGet);
         }
 
@@ -31,6 +31,7 @@ namespace HRM.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult AddPosition(PositionModel model)
         {
             var db = new HRMContext();
@@ -51,9 +52,16 @@ namespace HRM.Controllers
         /// <returns></returns>
         public ActionResult GetPositionById(int id)
         {
-            var db = new HRMContext();
-            var position = db.dChucVus.FirstOrDefault(x => x.id == id);
-            return Json(new { data = position, Status = true }, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var db = new HRMContext();
+                var position = db.dChucVus.FirstOrDefault(x => x.id == id);
+                return Json(new { data = position, Status = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
@@ -61,17 +69,76 @@ namespace HRM.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult EditPosition(PositionModel model)
         {
-            
-            var db = new HRMContext();
-            var entity = db.dChucVus.FirstOrDefault(x => x.id == model.id);
-            entity.machucvu = model.machucvu;
-            entity.tenchucvu = model.tenchucvu;
+            try
+            {
+                var db = new HRMContext();
+                var entity = db.dChucVus.FirstOrDefault(x => x.id == model.id);
+                entity.machucvu = model.machucvu;
+                entity.tenchucvu = model.tenchucvu;
 
-            db.SaveChanges();
+                db.SaveChanges();
 
-            return Json(new { data = entity, Status = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Xóa chức vụ    
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult DeletePosition(PositionModel model)
+        {
+            try
+            {
+                var db = new HRMContext();
+                var entity = db.dChucVus.FirstOrDefault(x => x.id == model.id);
+                entity.isDelete = true;
+                db.SaveChanges();
+
+                return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteMultiPosition(string ids)
+        {
+            try
+            {
+                var db = new HRMContext();
+                var lstId = ids.Split(',');
+                foreach (string item in lstId)
+                {
+                    var id = int.Parse(item);
+                    var entity = db.dChucVus.FirstOrDefault(x => x.id == id);
+                    if (entity != null)
+                    {
+                        entity.isDelete = true;
+                    }
+                }
+
+                db.SaveChanges();
+
+                return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }
