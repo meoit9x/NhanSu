@@ -26,7 +26,8 @@ $(function () {
     });
     var url = window.location;
 
-    $('#side-menu').on('click', 'a', function () {
+    $('#side-menu a').click(function (e) {
+        e.preventDefault();
         var href = $(this).attr('href');
         var id = $(this).data('iframe');
         var name = $(this).data('name');
@@ -37,15 +38,15 @@ $(function () {
         $(tab).find('li').removeClass("active");
         $(content).find('div').removeClass("active in");
 
-        var a = $(tab).find("a[href=#" + id + "]");
-        var div = $(content).find("#" + id);
+        if (id) {
+            var a = $(tab).find("a[href=#" + id + "]");
+            var div = $(content).find("#" + id);
 
-        if (a.length > 0) {
-            $(a).parent().addClass("active");
-            $(div).addClass("active in");
-        }
-        else {
-            if (id) {
+            if (a.length > 0) {
+                $(a).parent().addClass("active");
+                $(div).addClass("active in");
+            }
+            else {
                 var li = $("<li class='active'></li>");
                 var a = $("<a href='#" + id + "' data-iframe='" + id + "' data-toggle='tab' aria-expanded='true'>" + name + "<span style='cursor: pointer;margin-left: 10px;' class='deleteTab glyphicon glyphicon-remove'></span></a>")
                 $(li).append(a);
@@ -60,6 +61,7 @@ $(function () {
         }
         return false;
     });
+
     $(".nav-tabs").on("click", "a", function (e) {
         e.preventDefault();
         if (!$(this).hasClass('add-contact')) {
