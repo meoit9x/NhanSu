@@ -29,19 +29,7 @@
                     },
                     className: "dt-body-center"
                 },
-                { "mData": "tenquycach" },
-                {
-                    mData: "id",
-                    className: "dt-body-center",
-                    bSortable: false,
-                    mRender: function (o) {
-                        return "<span style='white-space: nowrap;'>" +
-                            "<a data-id='" + o + "' class='specification_edit btn btn-primary btn-sm'><i class='fa fa-pencil'></i></a>" +
-                            "&nbsp;" +
-                            "<a data-id='" + o + "' class='specification_del btn btn-danger btn-sm' data-toggle='modal' data-table='#modalconfirm'><i class='fa fa-times'></i></a>" +
-                            "</span>";
-                    }
-                }
+                { "mData": "tenquycach" }
             ],
             "order": [1, 'asc'],
             "language": {
@@ -93,7 +81,7 @@
     });
 
     // nút lưu
-    $("#deleteSpecification").click(function () {
+    $("#deleteMultiSpecification").click(function () {
         // Confirm user want to delete record: Xác nhận người dùng muốn xóa
         if (self.rows_selected.length > 0) {
             bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
@@ -188,10 +176,8 @@
 
 
     // ấn nút xóa trong bảng
-    $(self.specificationTable).on('click', 'a.specification_del', function (e) {
-        e.preventDefault();
-        
-        var id = $(this).attr("data-id");
+    $("#deleteSpecification").click(function (e) {
+        var id = $("#hdId").val();
         bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
             if (result == true) {
                 $.ajax({
@@ -203,6 +189,7 @@
                         if (result.Status == true) {
                             $.gritter.add({ title: "Quy cách", text: "Xóa Quy cách thành công !", image: "/Images/success.png", class_name: "clean", time: "1500" });
                             self.RefreshTableUser($(self.specificationTable), Config.Url + 'Specification/GetAllSpecification');
+                            $("#specificationModal").modal('hide');
                         }
                     }
                 });
@@ -210,18 +197,26 @@
         })
     });
 
+    $(self.specificationTable).on('click', 'tr', function () {
+        self.table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
     // ấn nút xóa trong sửa
-    $(self.specificationTable).on('click', 'a.specification_edit', function (e) {
-        e.preventDefault();
-        var id = $(this).attr("data-id");
+    $(self.specificationTable).on('click', 'tr', function (e) {
+        var $row = $(this);
+        // Get row data
+        var data = self.table.row($row).data();
+        // Get row ID
+        var rowId = data["id"];
         $.ajax({
             url: Config.Url + 'Specification/GetSpecificationById',
             async: false,
-            data: { 'id': id },
+            data: { 'id': rowId },
             type: "Get",
             success: function (result) {
                 if (result.Status == true) {
-                    $("#hdId").val(id);
+                    $("#hdId").val(rowId);
                     $('#txtCode').val(result.data.tenquycach);
                 }
             }

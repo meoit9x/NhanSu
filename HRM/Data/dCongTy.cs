@@ -47,6 +47,8 @@ namespace HRM.Data
 
         public bool? isdelete { get; set; }
 
+        public int? parent { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dNhanVien> dNhanViens { get; set; }
     }
