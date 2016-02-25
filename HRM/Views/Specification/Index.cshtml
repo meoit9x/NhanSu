@@ -4,5 +4,51 @@
     Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
 
-<h2>Index</h2>
+@section Scripts{
+    <script src="~/App_Script/Specification.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var specification = new Specification();
+            specification.init();
+        });
+    </script>
+}
 
+<input type="button" id="addSpecification" class="btn btn-primary" value="Thêm mới">
+<input type="button" id="deleteSpecification" class="btn btn-danger" value="Xóa">
+<div class="table-responsive">
+    <table id="specification" class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tên quy cách</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="specificationModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="title">Quy cách</h4>
+            </div>
+            <div class="modal-body" style="padding:10px" id="modalCustomer">
+                <div class="form-group">
+                    <label for="txtCode" class="control-label">Tên quy cách</label>
+                    <input type="text" class="form-control" id="txtCode">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="hdId" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                <button type="button" id="saveSpecification" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
