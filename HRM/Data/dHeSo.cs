@@ -24,6 +24,9 @@ namespace HRM.Data
         [StringLength(50)]
         public string nguoitao { get; set; }
 
+        [StringLength(100)]
+        public string tenheso { get; set; }
+
         public DateTime? ngaytao { get; set; }
 
         [StringLength(50)]

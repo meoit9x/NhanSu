@@ -203,7 +203,7 @@
     });
 
     // ấn nút xóa trong sửa
-    $(self.specificationTable).on('click', 'tr', function (e) {
+    $(self.specificationTable).on('dblclick', 'tr', function (e) {
         var $row = $(this);
         // Get row data
         var data = self.table.row($row).data();
