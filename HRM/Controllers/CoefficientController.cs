@@ -17,6 +17,17 @@ namespace HRM.Controllers
         }
 
         /// <summary>
+        /// lấy tất cả hệ số
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetAllCoefficient()
+        {
+            var db = new HRMContext();
+            var lstHeso = db.dHeSoes.Where(x => x.isDelete != true).ToList();
+            return Json(new { data = lstHeso, Status = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// thêm mới quy cách
         /// </summary>
         /// <param name="model"></param>
