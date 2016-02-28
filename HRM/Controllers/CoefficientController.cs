@@ -57,8 +57,26 @@ namespace HRM.Controllers
             try
             {
                 var db = new HRMContext();
+                List<CoefficientDetailModel> lstDetail = new List<CoefficientDetailModel>();
                 var Coefficient = db.dQuyCaches.FirstOrDefault(x => x.id == id);
-                return Json(new { data = Coefficient, Status = true }, JsonRequestBehavior.AllowGet);
+                foreach (var item in Coefficient.dHeSoCTs)
+                {
+                    CoefficientDetailModel modelDetail = new CoefficientDetailModel();
+                    modelDetail.id = item.id;
+                    modelDetail.tuthongso = item.tuthongso;
+                    modelDetail.denthongso = item.denthongso;
+
+                    if (item.dQuyCach != null)
+                    {
+                        modelDetail.idquycach = item.idquycach;
+                        modelDetail.quycachName = item.dQuyCach.tenquycach;
+                    }
+
+                    modelDetail.isDelete = item.isDelete;
+
+                    lstDetail.Add(modelDetail);
+                }
+                return Json(new { data = Coefficient, Details = lstDetail, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

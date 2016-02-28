@@ -27,5 +27,9 @@ namespace HRM.Models
         public double? denthongso { get; set; }
 
         public int? idquycach { get; set; }
+
+        public string quycachName { get; set; }
+
+        public bool? isDelete { get; set; }
     }
 }
