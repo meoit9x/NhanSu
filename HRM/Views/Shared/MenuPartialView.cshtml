@@ -19,14 +19,15 @@
                     <li>
                         @Html.ActionLink("Hệ số", "Index", "Coefficient", null, new { @data_name = "Hệ số", @data_iframe = "Coefficient" })
                     </li>
+                    <li>
+                        @Html.ActionLink("Đơn giá bộ phận", "Index", "UnitPrice", null, new { @data_name = "Đơn giá bộ phận", @data_iframe = "UnitPrice" })
+                    </li>
                 </ul>
             </li>
             <li>
                 <a href="#"><i class="fa fa-table fa-fw"></i> Danh Mục <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        @Html.ActionLink("Đơn giá bộ phận", "Index", "UnitPrice", null, new { @data_name = "Đơn giá bộ phận", @data_iframe = "UnitPrice" })
-                    </li>
+                    
                     <li>
                         @Html.ActionLink("Sản phẩm", "Index", "Product", null, new { @data_name = "Sản phẩm", @data_iframe = "Product" })
                     </li>
