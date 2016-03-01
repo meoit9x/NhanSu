@@ -29,7 +29,11 @@
                     },
                     className: "dt-body-center"
                 },
-                { "mData": "tenquycach" }
+                { "mData": "tenquycach" },
+                { "mData": "nguoitao" },
+                { "mData": "ngaytao" },
+                { "mData": "nguoisua" },
+                { "mData": "ngaysua" },
             ],
             "order": [1, 'asc'],
             "language": {
