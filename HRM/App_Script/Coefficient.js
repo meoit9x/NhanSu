@@ -156,7 +156,7 @@
         item.id = $("#hdIdDetail").val();
         item.tuthongso = $("#txtFrom").val();
         item.denthongso = $("#txtTo").val();
-        item.idquycach = $("#hdIdSpecification").val();
+        item.idquycach = $("#txtIdSpecification").val();
 
         // add item vào list
         self.listDetail.push(item);
@@ -164,7 +164,7 @@
         var tr = $("<tr></tr>");
         var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
         var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
-        var tdSpecification = $("<td><label class='.lbTo'>" + $("#txtSpecification").val() + "</label></td>");
+        var tdSpecification = $("<td><label class='.lbTo'>" + $("#txtIdSpecification").text() + "</label></td>");
 
         $(tr).append(tdFrom);
         $(tr).append(tdTo);
@@ -298,11 +298,10 @@
         var hdIdSpecification = $(this).find(".hdSpecification").val();
         var txtSpecification = $(this).find(".lbSpecification").val();
         $("#hdIdDetail").val(rowId);
-        $("#hdIdDetail").val(hdIdSpecification);
         $("#hdRowIndex").val(rowIndex);
         $("#txtFrom").val(from);
         $("#txtTo").val(to);
-        $("#txtSpecification").val(txtSpecification);
+        $("#txtIdSpecification").val(hdIdSpecification);
         
         $("#detailModal").modal('show');
     });
