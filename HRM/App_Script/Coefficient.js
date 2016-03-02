@@ -35,9 +35,7 @@
                 },
                 { "mData": "tenheso" },
                 { "mData": "thongso" },
-                { "mData": "bophan" },
-                { "mData": "nguoitao" },
-                { "mData": "ngaytao" }
+                { "mData": "bophan" }
             ],
             "order": [1, 'asc'],
             "language": {
@@ -289,7 +287,7 @@
             type: "Get",
             success: function (result) {
                 if (result.Status == true) {
-                    $("#coefficient tbody").empty();
+                    $("#detailCoefficient tbody").empty();
                     $("#hdId").val(rowId);
                     $("#txtName").val(result.data.tenheso);
                     $("#txtDepartment").val(result.data.idbophan);
