@@ -20,6 +20,7 @@ namespace HRM.Controllers
         /// lấy tất cả hệ số
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult GetAllCoefficient()
         {
             var db = new HRMContext();
@@ -82,6 +83,7 @@ namespace HRM.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult GetCoefficientById(int id)
         {
             using (var db = new HRMContext())
@@ -89,7 +91,7 @@ namespace HRM.Controllers
                 try
                 {
                     List<CoefficientDetailModel> lstDetail = new List<CoefficientDetailModel>();
-                    var Coefficient = db.dQuyCaches.FirstOrDefault(x => x.id == id);
+                    var Coefficient = db.dHeSoes.FirstOrDefault(x => x.id == id);
                     foreach (var item in Coefficient.dHeSoCTs)
                     {
                         CoefficientDetailModel modelDetail = new CoefficientDetailModel();

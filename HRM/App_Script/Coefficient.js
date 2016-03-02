@@ -105,6 +105,7 @@
         $("#txtDepartment").val("");
         $("#txtCoefficient").val("");
         self.listDetail = [];
+        $("#coefficient tbody").empty();
         $("#coefficientModal").modal('show');
     });
 
