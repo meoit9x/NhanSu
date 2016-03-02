@@ -2,7 +2,7 @@
     Layout = "";
     Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
-
+@model HRM.Models.LoginViewModel
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,21 +24,21 @@
         <link href="~/Content/login.css" rel="stylesheet" />
     </head>
     <body>
-        <form method="post" action="" class="login">
-            <p>
-                <label for="login">Email:</label>
-                <input type="text" name="login" id="login" value="name@example.com">
-            </p>
-            <p>
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password" value="4815162342">
-            </p>
-            <p class="login-submit">
-                <button type="submit" class="login-button">Login</button>
-            </p>
-            <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
-        </form>
-
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, null))
+            {
+                <p>
+                        <label for="login">Email:</label>
+                        @Html.EditorFor(model => model.User)
+                    </p>
+                    <p>
+                        <label for="password">Password:</label>
+                        @Html.EditorFor(model => model.Password)
+                    </p>
+                    <p class="login-submit">
+                        <button type="submit" class="login-button">Login</button>
+                    </p>
+                    <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
+            }
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
         <!-- Bootstrap Core JavaScript -->
