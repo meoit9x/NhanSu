@@ -28,85 +28,126 @@ namespace HRM.Controllers
         }
 
         /// <summary>
-        /// thêm mới quy cách
+        /// thêm mới hệ số
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult AddCoefficient(CoefficientModel model)
         {
-            var db = new HRMContext();
-            var entity = new dHeSo();
-            entity.idbophan = model.idbophan;
-            entity.thongso = model.thongso;
-            entity.tenheso = model.tenheso;
 
-            var quycach = db.dHeSoes.Add(entity);
-            db.SaveChanges();
+            using (var db = new HRMContext())
+            {
+                using (var scope = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var entity = new dHeSo();
+                        entity.idbophan = model.idbophan;
+                        entity.thongso = model.thongso;
+                        entity.tenheso = model.tenheso;
 
-            return Json(new { data = quycach, Status = true }, JsonRequestBehavior.AllowGet);
+                        var heso = db.dHeSoes.Add(entity);
+
+                        db.SaveChanges();
+
+                        foreach (var item in model.DetailModel)
+                        {
+                            dHeSoCT ct = new dHeSoCT();
+                            ct.tuthongso = item.tuthongso;
+                            ct.denthongso = item.denthongso;
+                            ct.idquycach = item.idquycach;
+                            ct.idHeSo = heso.id;
+
+                            db.dHeSoCTs.Add(ct);
+                        }
+
+                        db.SaveChanges();
+
+                        scope.Commit();
+
+                        return Json(new { data = heso, Status = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    catch (Exception ex)
+                    {
+                        scope.Rollback();
+                        return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
         }
 
         /// <summary>
-        /// lấy quy cách theo id
+        /// lấy hệ số theo id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult GetCoefficientById(int id)
         {
-            try
+            using (var db = new HRMContext())
             {
-                var db = new HRMContext();
-                List<CoefficientDetailModel> lstDetail = new List<CoefficientDetailModel>();
-                var Coefficient = db.dQuyCaches.FirstOrDefault(x => x.id == id);
-                foreach (var item in Coefficient.dHeSoCTs)
+                try
                 {
-                    CoefficientDetailModel modelDetail = new CoefficientDetailModel();
-                    modelDetail.id = item.id;
-                    modelDetail.tuthongso = item.tuthongso;
-                    modelDetail.denthongso = item.denthongso;
-
-                    if (item.dQuyCach != null)
+                    List<CoefficientDetailModel> lstDetail = new List<CoefficientDetailModel>();
+                    var Coefficient = db.dQuyCaches.FirstOrDefault(x => x.id == id);
+                    foreach (var item in Coefficient.dHeSoCTs)
                     {
-                        modelDetail.idquycach = item.idquycach;
-                        modelDetail.quycachName = item.dQuyCach.tenquycach;
+                        CoefficientDetailModel modelDetail = new CoefficientDetailModel();
+                        modelDetail.id = item.id;
+                        modelDetail.tuthongso = item.tuthongso;
+                        modelDetail.denthongso = item.denthongso;
+
+                        if (item.dQuyCach != null)
+                        {
+                            modelDetail.idquycach = item.idquycach;
+                            modelDetail.quycachName = item.dQuyCach.tenquycach;
+                        }
+
+                        modelDetail.isDelete = item.isDelete;
+
+                        lstDetail.Add(modelDetail);
                     }
-
-                    modelDetail.isDelete = item.isDelete;
-
-                    lstDetail.Add(modelDetail);
+                    return Json(new { data = Coefficient, Details = lstDetail, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { data = Coefficient, Details = lstDetail, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+                catch (Exception ex)
+                {
+                    return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+                }
             }
         }
 
         /// <summary>
-        /// Sửa quy cách    
+        /// Sửa hệ số
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult EditCoefficient(CoefficientModel model)
         {
-            try
+            using (var db = new HRMContext())
             {
-                var db = new HRMContext();
-                var entity = db.dHeSoes.FirstOrDefault(x => x.id == model.id);
-                entity.idbophan = model.idbophan;
-                entity.thongso = model.thongso;
-                entity.tenheso = model.tenheso;
+                using (var scope = db.Database.BeginTransaction())
+                {
+                    try
+                    {
 
-                db.SaveChanges();
+                        var entity = db.dHeSoes.FirstOrDefault(x => x.id == model.id);
+                        entity.idbophan = model.idbophan;
+                        entity.thongso = model.thongso;
+                        entity.tenheso = model.tenheso;
 
-                return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+                        db.SaveChanges();
+
+
+                        scope.Commit();
+                        return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+                    }
+                    catch (Exception ex)
+                    {
+                        scope.Rollback();
+                        return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+                    }
+                }
             }
         }
 
@@ -121,7 +162,7 @@ namespace HRM.Controllers
             try
             {
                 var db = new HRMContext();
-                var entity = db.dQuyCaches.FirstOrDefault(x => x.id == model.id);
+                var entity = db.dHeSoes.FirstOrDefault(x => x.id == model.id);
                 entity.isDelete = true;
                 db.SaveChanges();
 

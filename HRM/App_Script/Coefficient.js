@@ -9,6 +9,8 @@
 
     // chạy khi page nó load
     self.init = function () {
+        self.LoadSpecification();
+
         self.table = $(self.coefficientTable).DataTable({
             "bDestroy": true,
             "bProcessing": true,
@@ -42,8 +44,6 @@
                 "emptyTable": "Không có bản ghi nào."
             }
         });
-
-        self.LoadSpecification();
     }
 
     self.RefreshTableUser = function (tableId, urlData) {
@@ -83,11 +83,12 @@
     }
 
     self.LoadSpecification = function (){
-        ajax({
+        $.ajax({
             url: Config.Url + 'Specification/GetAllSpecification',
             async: false,
             type: "Get",
             success: function (result) {
+                debugger;
                 if (result.Status == true) {
                     result.data.forEach(function (item) {
                         var option = $("<option value='" + item.id + "'>" + item.tenquycach + "</option>");
@@ -132,6 +133,10 @@
     // nút lưu
     $('#saveCoefficient').click(function () {
         var id = $("#hdId").val();
+        var tenheso = $("#txtName").val();
+        var thongso = $("#txtCoefficient").val();
+        var idbophan = $("#txtDepartment").val();
+        
         if (!id) {
             $.ajax({
                 url: Config.Url + 'Coefficient/AddCoefficient',
@@ -182,8 +187,11 @@
         var tr = $("<tr></tr>");
         var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
         var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
-        var tdSpecification = $("<td><label class='.lbTo'>" + $("#txtIdSpecification").text() + "</label></td>");
-
+        var tdSpecification = $("<td></td>");
+        var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification").text() + "</label>");
+        var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></label>");
+        $(tdSpecification).append(lbSpecification);
+        $(tdSpecification).append(hdSpecification);
         $(tr).append(tdFrom);
         $(tr).append(tdTo);
         $(tr).append(tdSpecification);
@@ -280,6 +288,7 @@
             type: "Get",
             success: function (result) {
                 if (result.Status == true) {
+                    $("#coefficient tbody").empty();
                     $("#hdId").val(rowId);
                     $("#txtName").val(result.data.tenheso);
                     $("#txtDepartment").val(result.data.idbophan);
