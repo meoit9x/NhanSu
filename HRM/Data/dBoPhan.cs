@@ -37,6 +37,8 @@ namespace HRM.Data
 
         public DateTime? ngaysua { get; set; }
 
+        public bool? isproduce { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dDonGia> dDonGias { get; set; }
 

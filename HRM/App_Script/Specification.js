@@ -12,7 +12,7 @@
             "bProcessing": true,
             "oSearch": { "bSmart": false, "bRegex": true },
             "sDom": 't<pl>',
-            "sAjaxSource": Config.Url + 'Specification/GetAllSpecification',
+            "sAjaxSource": Config.Url + 'Specification/GetSpecification',
             "pagingType": "full_numbers",
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "aoColumns": [
@@ -72,7 +72,7 @@
                 if (result.Status == true) {
                     alert("Xóa Quy cách thành công !");
                     self.rows_selected = [];
-                    self.RefreshTableUser($(self.specificationTable), Config.Url + 'Specification/GetAllSpecification');
+                    self.RefreshTableUser($(self.specificationTable), Config.Url + 'Specification/GetSpecification');
                 }
             }
         });
@@ -116,7 +116,7 @@
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
 
-                        self.RefreshTableUser($(self.specificationTable), '/Specification/GetAllSpecification');
+                        self.RefreshTableUser($(self.specificationTable), '/Specification/GetSpecification');
                         $("#specificationModal").modal('hide');
                     }
                 }
@@ -133,7 +133,7 @@
                 success: function (result) {
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
-                        self.RefreshTableUser($(self.specificationTable), '/Specification/GetAllSpecification');
+                        self.RefreshTableUser($(self.specificationTable), '/Specification/GetSpecification');
                         $("#specificationModal").modal('hide');
                     }
                 }
@@ -192,7 +192,7 @@
                     success: function (result) {
                         if (result.Status == true) {
                             $.gritter.add({ title: "Quy cách", text: "Xóa Quy cách thành công !", image: "/Images/success.png", class_name: "clean", time: "1500" });
-                            self.RefreshTableUser($(self.specificationTable), Config.Url + 'Specification/GetAllSpecification');
+                            self.RefreshTableUser($(self.specificationTable), Config.Url + 'Specification/GetSpecification');
                             $("#specificationModal").modal('hide');
                         }
                     }

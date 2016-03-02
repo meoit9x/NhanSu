@@ -19,6 +19,17 @@ namespace HRM.Controllers
         /// lấy tất cả quy cách
         /// </summary>
         /// <returns></returns>
+        public ActionResult GetSpecification()
+        {
+            var db = new HRMContext();
+            var lstQuyCach = db.dQuyCaches.Where(x => x.isDelete != true).ToList();
+            return Json(new { data = lstQuyCach, Status = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// lấy tất cả quy cách
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetAllSpecification()
         {
             var db = new HRMContext();

@@ -42,6 +42,8 @@
                 "emptyTable": "Không có bản ghi nào."
             }
         });
+
+        self.LoadSpecification();
     }
 
     self.RefreshTableUser = function (tableId, urlData) {
@@ -75,6 +77,22 @@
                     alert("Xóa Quy cách thành công !");
                     self.rows_selected = [];
                     self.RefreshTableUser($(self.coefficientTable), Config.Url + 'Coefficient/GetAllCoefficient');
+                }
+            }
+        });
+    }
+
+    self.LoadSpecification = function (){
+        ajax({
+            url: Config.Url + 'Specification/GetAllSpecification',
+            async: false,
+            type: "Get",
+            success: function (result) {
+                if (result.Status == true) {
+                    result.data.forEach(function (item) {
+                        var option = $("<option value='" + item.id + "'>" + item.tenquycach + "</option>");
+                        $("#txtIdSpecification").append(option);
+                    })
                 }
             }
         });
