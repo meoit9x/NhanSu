@@ -55,16 +55,25 @@ namespace HRM.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            LoginViewModel model = new LoginViewModel();
             ViewBag.ReturnUrl = returnUrl;
+            return View(model);
+        }   
+
+        [AllowAnonymous]
+        public ActionResult ActionClickButton(string user, string password)
+        {
+            ViewBag.login = "";
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            return null;
+            var i = 1;
+            model.User = "asdasasdasdd";
+            return View(model);
         }
     }
 }

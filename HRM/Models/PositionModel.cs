@@ -15,10 +15,10 @@ namespace HRM.Models
 
         public string nguoitao { get; set; }
 
-        public string ngaytao { get; set; }
+        public DateTime ngaytao { get; set; }
 
         public string nguoisua { get; set; }
 
-        public string ngaysua { get; set; }
+        public DateTime ngaysua { get; set; }
     }
 }

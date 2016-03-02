@@ -38,6 +38,10 @@ namespace HRM.Controllers
             var entity = new dChucVu();
             entity.machucvu = model.machucvu;
             entity.tenchucvu = model.tenchucvu;
+            entity.nguoitao = model.nguoitao;
+            entity.ngaytao = model.ngaytao;
+            entity.nguoisua = model.nguoisua;
+            entity.ngaysua = model.ngaysua;
 
             var position = db.dChucVus.Add(entity);
             db.SaveChanges();
