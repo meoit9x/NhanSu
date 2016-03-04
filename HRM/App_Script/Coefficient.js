@@ -35,7 +35,6 @@
                 { "mData": "thongso" },
                 { "mData": "bophan" }
             ],
-            "order": [1, 'asc'],
             "language": {
                 "emptyTable": "Không có bản ghi nào."
             }

@@ -40,7 +40,6 @@
                     className: "dt-body-center"
                 }
             ],
-            "order": [1, 'asc'],
             "language": {
                 "emptyTable": "Không có bản ghi nào."
             }

@@ -30,7 +30,6 @@
                 { "mData": "machucvu" },
                 { "mData": "tenchucvu" }
             ],
-            "order": [1, 'asc'],
             "language": {
                 "emptyTable": "Không có bản ghi nào."
             }
