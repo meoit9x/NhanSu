@@ -20,19 +20,6 @@
             "pagingType": "full_numbers",
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "aoColumns": [
-                {
-                    mData: "id",
-                    'width': '15px',
-                    searchable: false,
-                    orderable: false,
-                    render: function (data, type, row) {
-                        if (type === 'display') {
-                            return '<input type="checkbox" class="editor-active">';
-                        }
-                        return data;
-                    },
-                    className: "dt-body-center"
-                },
                 { "mData": "tenheso" },
                 { "mData": "thongso" },
                 { "mData": "bophan" }
