@@ -13,14 +13,6 @@ namespace HRM.Models
 
         public string tenbophan { get; set; }
 
-        public string isProduct { get; set; }
-
-        public string nguoitao { get; set; }
-
-        public DateTime ngaytao { get; set; }
-
-        public string nguoisua { get; set; }
-
-        public DateTime ngaysua { get; set; }
+        public bool isProduct { get; set; }
     }
 }

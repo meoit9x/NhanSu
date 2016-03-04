@@ -35,19 +35,24 @@ namespace HRM.Controllers
         [HttpPost]
         public ActionResult AddDepartment(DepartmentModel model)
         {
-            var db = new HRMContext();
-            var entity = new dBoPhan();
-            entity.mabophan = model.mabophan;
-            entity.tenbophan = model.tenbophan;
-            entity.nguoitao = model.nguoitao;
-            entity.ngaytao = model.ngaytao;
-            entity.nguoisua = model.nguoisua;
-            entity.ngaysua = model.ngaysua;
+            try
+            {
+                var db = new HRMContext();
+                var entity = new dBoPhan();
+                entity.mabophan = model.mabophan;
+                entity.tenbophan = model.tenbophan;
+                entity.isproduce = model.isProduct;
 
-            var Department = db.dBoPhans.Add(entity);
-            db.SaveChanges();
+                var Department = db.dBoPhans.Add(entity);
+                db.SaveChanges();
 
-            return Json(new { data = Department, Status = true }, JsonRequestBehavior.AllowGet);
+                return Json(new { data = Department, Status = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
         /// <summary>
@@ -83,6 +88,7 @@ namespace HRM.Controllers
                 var entity = db.dBoPhans.FirstOrDefault(x => x.id == model.id);
                 entity.mabophan = model.mabophan;
                 entity.tenbophan = model.tenbophan;
+                entity.isproduce = model.isProduct;
                 
                 db.SaveChanges();
 

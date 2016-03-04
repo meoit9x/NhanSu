@@ -20,7 +20,7 @@ namespace HRM.Models
 
     public class CoefficientDetailModel
     {
-        public int id { get; set; }
+        public int? id { get; set; }
 
         public double? tuthongso { get; set; }
 

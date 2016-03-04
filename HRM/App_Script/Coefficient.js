@@ -86,7 +86,6 @@
             async: false,
             type: "Get",
             success: function (result) {
-                debugger;
                 if (result.Status == true) {
                     result.data.forEach(function (item) {
                         var option = $("<option value='" + item.id + "'>" + item.tenquycach + "</option>");
@@ -103,7 +102,7 @@
         $("#txtDepartment").val("");
         $("#txtCoefficient").val("");
         self.listDetail = [];
-        $("#coefficient tbody").empty();
+        $("#detailCoefficient tbody").empty();
         $("#coefficientModal").modal('show');
     });
 

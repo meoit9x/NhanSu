@@ -9,7 +9,6 @@ namespace HRM.Data
     [Table("dHeSoCT")]
     public partial class dHeSoCT
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         public double? tuthongso { get; set; }

@@ -31,12 +31,16 @@
                 },
                 { "mData": "mabophan" },
                 { "mData": "tenbophan" },
-                { "mData": "isProduct" },
-                { "mData": "nguoitao" },
-                { "mData": "ngaytao" },
-                { "mData": "nguoisua" },
-                { "mData": "ngaysua" },
-
+                {
+                    "mData": "isproduce",
+                    render: function (data, type, row) {
+                        if (type === 'display') {
+                            return '<input type="checkbox" disabled ' + (row.isproduce ? 'checked' : '') + ' class="editor-active">';
+                        }
+                        return data;
+                    },
+                    className: "dt-body-center"
+                }
             ],
             "order": [1, 'asc'],
             "language": {
@@ -108,19 +112,18 @@
         var id = $("#hdId").val();
         var mabophan = $("#txtCode").val();
         var tenbophan = $("#txtName").val();
-
+        var isproduct = $('#cbSanXuat').is(':checked');
         if (!id) {
             $.ajax({
                 url: Config.Url + 'Department/AddDepartment',
                 async: false,
                 data: {
-                    mabophan: mabophan, tenbophan: tenbophan
+                    mabophan: mabophan, tenbophan: tenbophan, isproduct: isproduct
                 },
                 type: "POST",
                 success: function (result) {
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
-
                         self.RefreshTableUser($(self.departmentTable), '/Department/GetAllDepartment');
                         $("#departmentModal").modal('hide');
                     }
@@ -132,7 +135,7 @@
                 url: Config.Url + 'Department/EditDepartment',
                 async: false,
                 data: {
-                    id: id, mabophan: mabophan, tenbophan: tenbophan
+                    id: id, mabophan: mabophan, tenbophan: tenbophan, isproduct: isproduct
                 },
                 type: "POST",
                 success: function (result) {
@@ -225,6 +228,7 @@
                     $("#hdId").val(rowId);
                     $('#txtCode').val(result.data.mabophan);
                     $('#txtName').val(result.data.tenbophan);
+                    $('#cbSanXuat').prop('checked', result.data.isproduce);
                 }
             }
         });

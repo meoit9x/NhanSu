@@ -138,9 +138,32 @@ namespace HRM.Controllers
                         entity.thongso = model.thongso;
                         entity.tenheso = model.tenheso;
 
+                        foreach (var item in model.DetailModel)
+                        {
+                            dHeSoCT ct;
+                            if (item.id != null)
+                            {
+                                ct = db.dHeSoCTs.FirstOrDefault(x => x.id == model.id);
+                                ct.tuthongso = item.tuthongso;
+                                ct.denthongso = item.denthongso;
+                                ct.idquycach = item.idquycach;
+                                ct.idHeSo = entity.id;
+                            }
+                            else
+                            {
+                                ct = new dHeSoCT();
+                                ct.tuthongso = item.tuthongso;
+                                ct.denthongso = item.denthongso;
+                                ct.idquycach = item.idquycach;
+                                ct.idHeSo = entity.id;
+                                ct.isDelete = item.isDelete;
+
+                                db.dHeSoCTs.Add(ct);
+                            }
+                            
+                        }
+
                         db.SaveChanges();
-
-
                         scope.Commit();
                         return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                     }

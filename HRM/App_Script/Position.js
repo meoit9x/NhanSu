@@ -30,12 +30,7 @@
                     className: "dt-body-center"
                 },
                 { "mData": "machucvu" },
-                { "mData": "tenchucvu" },
-                { "mData": "nguoitao" },
-                { "mData": "ngaytao" },
-                { "mData": "nguoisua" },
-                { "mData": "ngaysua" },
-
+                { "mData": "tenchucvu" }
             ],
             "order": [1, 'asc'],
             "language": {
