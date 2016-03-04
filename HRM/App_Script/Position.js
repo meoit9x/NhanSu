@@ -16,6 +16,17 @@
             "pagingType": "full_numbers",
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "aoColumns": [
+                {
+                    mData: "id",
+                    'width': '15px',
+                    searchable: false,
+                    orderable: false,
+                    render: function (data, type, row, meta) {
+                        var index = meta.row + 1;
+                        return index;
+                    },
+                    className: "dt-body-center"
+                },
                 { "mData": "machucvu" },
                 { "mData": "tenchucvu" }
             ],

@@ -21,19 +21,13 @@
                     'width': '15px',
                     searchable: false,
                     orderable: false,
-                    render: function (data, type, row) {
-                        if (type === 'display') {
-                            return '<input type="checkbox" class="editor-active">';
-                        }
-                        return data;
+                    render: function (data, type, row, meta) {
+                        var index = meta.row + 1;
+                        return index;
                     },
                     className: "dt-body-center"
                 },
                 { "mData": "tenquycach" },
-                { "mData": "nguoitao" },
-                { "mData": "ngaytao" },
-                { "mData": "nguoisua" },
-                { "mData": "ngaysua" },
             ],
             "order": [1, 'asc'],
             "language": {
