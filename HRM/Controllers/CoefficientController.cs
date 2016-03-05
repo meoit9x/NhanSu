@@ -24,7 +24,12 @@ namespace HRM.Controllers
         public ActionResult GetAllCoefficient()
         {
             var db = new HRMContext();
-            var lstHeso = db.dHeSoes.Where(x => x.isDelete != true).ToList();
+            var lstHeso = db.dHeSoes.Where(x => x.isDelete != true).Select(x => new {
+                x.id,
+                x.idbophan,
+                x.thongso,
+                x.tenheso
+            }).ToList();
             return Json(new { data = lstHeso, Status = true }, JsonRequestBehavior.AllowGet);
         }
 

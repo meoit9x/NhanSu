@@ -33,7 +33,7 @@
                 },
                 { "mData": "tenheso" },
                 { "mData": "thongso" },
-                { "mData": "bophan" }
+                { "mData": "idbophan" }
             ],
             "language": {
                 "emptyTable": "Không có bản ghi nào."

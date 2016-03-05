@@ -22,7 +22,10 @@ namespace HRM.Controllers
         public ActionResult GetSpecification()
         {
             var db = new HRMContext();
-            var lstQuyCach = db.dQuyCaches.Where(x => x.isDelete != true).ToList();
+            var lstQuyCach = db.dQuyCaches.Where(x => x.isDelete != true).Select(x => new { 
+                x.id,
+                x.tenquycach
+            }).ToList();
             return Json(new { data = lstQuyCach, Status = true }, JsonRequestBehavior.AllowGet);
         }
 
