@@ -12,7 +12,7 @@
             "bProcessing": true,
             "oSearch": { "bSmart": false, "bRegex": true },
             "sDom": 't<pl>',
-            "sAjaxSource": Config.Url + 'Department/GetAllDepartment',
+            "sAjaxSource": Config.Url + 'Department/GetDepartment',
             "pagingType": "full_numbers",
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "aoColumns": [
@@ -76,7 +76,7 @@
                 if (result.Status == true) {
                     alert("Xóa chức vụ thành công !");
                     self.rows_selected = [];
-                    self.RefreshTableUser($(self.departmentTable), Config.Url + 'Department/GetAllDepartment');
+                    self.RefreshTableUser($(self.departmentTable), Config.Url + 'Department/GetDepartment');
                 }
             }
         });
@@ -121,7 +121,7 @@
                 success: function (result) {
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
-                        self.RefreshTableUser($(self.departmentTable), '/Department/GetAllDepartment');
+                        self.RefreshTableUser($(self.departmentTable), '/Department/GetDepartment');
                         $("#departmentModal").modal('hide');
                     }
                 }
@@ -138,7 +138,7 @@
                 success: function (result) {
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
-                        self.RefreshTableUser($(self.departmentTable), '/Department/GetAllDepartment');
+                        self.RefreshTableUser($(self.departmentTable), '/Department/GetDepartment');
                         $("#departmentModal").modal('hide');
                     }
                 }
@@ -194,7 +194,7 @@
                     success: function (result) {
                         if (result.Status == true) {
                             $.gritter.add({ title: "Bộ phận", text: "Xóa chức vụ thành công !", image: "/Images/success.png", class_name: "clean", time: "1500" });
-                            self.RefreshTableUser($(self.departmentTable), Config.Url + 'Department/GetAllDepartment');
+                            self.RefreshTableUser($(self.departmentTable), Config.Url + 'Department/GetDepartment');
                             $("#departmentModal").modal('hide');
                         }
                     }

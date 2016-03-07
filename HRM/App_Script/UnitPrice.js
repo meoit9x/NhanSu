@@ -1,7 +1,7 @@
-﻿function Coefficient() {
+﻿function UnitPrice() {
     var self = this;
 
-    self.coefficientTable = $("#coefficient");
+    self.unitPriceTable = $("#unitPrice");
     self.table = {};
     self.rows_selected = [];
     self.listDetail = [];
@@ -12,12 +12,12 @@
         self.LoadSpecification();
         self.LoadDepartment();
 
-        self.table = $(self.coefficientTable).DataTable({
+        self.table = $(self.unitPriceTable).DataTable({
             "bDestroy": true,
             "bProcessing": true,
             "oSearch": { "bSmart": false, "bRegex": true },
             "sDom": 't<pl>',
-            "sAjaxSource": Config.Url + 'Coefficient/GetAllCoefficient',
+            "sAjaxSource": Config.Url + 'UnitPrice/GetAllUnitPrice',
             "pagingType": "full_numbers",
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "aoColumns": [
@@ -32,8 +32,8 @@
                     },
                     className: "dt-body-center"
                 },
-                { "mData": "tenheso" },
-                { "mData": "thongso" },
+                { "mData": "madongia" },
+                { "mData": "dongia" },
                 { "mData": "bophan" }
             ],
             "language": {
@@ -44,23 +44,23 @@
 
     self.RefreshTableUser = function (tableId, urlData) {
         $.getJSON(urlData, null, function (json) {
-            coefficientTable = $(tableId).dataTable();
-            oSettings = coefficientTable.fnSettings();
+            UnitPriceTable = $(tableId).dataTable();
+            oSettings = UnitPriceTable.fnSettings();
 
-            coefficientTable.fnClearTable(this);
+            UnitPriceTable.fnClearTable(this);
 
             for (var i = 0; i < json.data.length; i++) {
-                coefficientTable.oApi._fnAddData(oSettings, json.data[i]);
+                UnitPriceTable.oApi._fnAddData(oSettings, json.data[i]);
             }
 
             oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
-            coefficientTable.fnDraw();
+            UnitPriceTable.fnDraw();
         });
     }
 
     self.DeleteMulti = function () {
         $.ajax({
-            url: Config.Url + 'Coefficient/DeleteMultiCoefficient',
+            url: Config.Url + 'UnitPrice/DeleteMultiUnitPrice',
             async: false,
             traditional: true,
             data: {
@@ -72,13 +72,13 @@
                 if (result.Status == true) {
                     alert("Xóa Quy cách thành công !");
                     self.rows_selected = [];
-                    self.RefreshTableUser($(self.coefficientTable), Config.Url + 'Coefficient/GetAllCoefficient');
+                    self.RefreshTableUser($(self.unitPriceTable), Config.Url + 'UnitPrice/GetAllUnitPrice');
                 }
             }
         });
     }
 
-    self.LoadSpecification = function (){
+    self.LoadSpecification = function () {
         $.ajax({
             url: Config.Url + 'Specification/GetAllSpecification',
             async: false,
@@ -110,25 +110,25 @@
         });
     }
 
-    $("#addCoefficient").click(function () {
+    $("#addUnitPrice").click(function () {
         $("#hdId").val("");
-        $("#txtName").val("");
+        $("#txtCode").val("");
         $("#txtDepartment").val("");
-        $("#txtCoefficient").val("");
+        $("#txtUnitPrice").val("");
         self.listDetail = [];
-        $("#detailCoefficient tbody").empty();
-        $("#coefficientModal").modal('show');
+        $("#detailUnitPrice tbody").empty();
+        $("#unitPriceModal").modal('show');
     });
 
-    $("#addDetail").click(function () {
+    $("#addUnitPriceDetail").click(function () {
         $("#hdIdDetail").val("");
         $("#txtFrom").val("");
         $("#txtTo").val("");
-        $("#detailModal").modal('show');
+        $("#unitPriceDetailModal").modal('show');
     });
 
     // nút lưu
-    $("#deleteMultiCoefficient").click(function () {
+    $("#deleteMultiUnitPrice").click(function () {
         // Confirm user want to delete record: Xác nhận người dùng muốn xóa
         if (self.rows_selected.length > 0) {
             bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
@@ -143,42 +143,42 @@
     });
 
     // nút lưu
-    $('#saveCoefficient').click(function () {
+    $('#saveUnitPrice').click(function () {
         var id = $("#hdId").val();
-        var tenheso = $("#txtName").val();
-        var thongso = $("#txtCoefficient").val();
+        var madongia = $("#txtCode").val();
+        var dongia = $("#txtUnitPrice").val();
         var idbophan = $("#txtDepartment").val();
-        
+
         if (!id) {
             $.ajax({
-                url: Config.Url + 'Coefficient/AddCoefficient',
+                url: Config.Url + 'UnitPrice/AddUnitPrice',
                 async: false,
                 data: {
-                    tenheso: tenheso, thongso: thongso, idbophan: idbophan, detailModel: self.listDetail
+                    madongia: madongia, dongia: dongia, idbophan: idbophan, detailModel: self.listDetail
                 },
                 type: "POST",
                 success: function (result) {
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
-                        self.RefreshTableUser($(self.coefficientTable), '/Coefficient/GetAllCoefficient');
-                        $("#coefficientModal").modal('hide');
+                        self.RefreshTableUser($(self.unitPriceTable), '/UnitPrice/GetAllUnitPrice');
+                        $("#unitPriceModal").modal('hide');
                     }
                 }
             });
         }
         else {
             $.ajax({
-                url: Config.Url + 'Coefficient/EditCoefficient',
+                url: Config.Url + 'UnitPrice/EditUnitPrice',
                 async: false,
                 data: {
-                    id: id, tenheso: tenheso, thongso: thongso, idbophan: idbophan, detailModel: self.listDetail
+                    id: id, madongia: madongia, dongia: dongia, idbophan: idbophan, detailModel: self.listDetail
                 },
                 type: "POST",
                 success: function (result) {
                     if (result.Status == true) {
                         alert("Cập nhật thông tin thành công !");
-                        self.RefreshTableUser($(self.coefficientTable), '/Coefficient/GetAllCoefficient');
-                        $("#coefficientModal").modal('hide');
+                        self.RefreshTableUser($(self.unitPriceTable), '/UnitPrice/GetAllUnitPrice');
+                        $("#unitPriceModal").modal('hide');
                     }
                 }
             });
@@ -207,12 +207,12 @@
         $(tr).append(tdFrom);
         $(tr).append(tdTo);
         $(tr).append(tdSpecification);
-        $("#detailCoefficient tbody").append(tr);
-        $("#detailModal").modal('hide');
+        $("#detailUnitPrice tbody").append(tr);
+        $("#unitPriceDetailModal").modal('hide');
     });
 
     // Handle click on checkbox: khi người dùng click vào checkbox trên tbody
-    $(self.coefficientTable).on('click', 'input[type="checkbox"]', function (e) {
+    $(self.unitPriceTable).on('click', 'input[type="checkbox"]', function (e) {
 
         var $row = $(this).closest('tr');
         // Get row data
@@ -238,29 +238,29 @@
             $row.removeClass('selected');
         }
         if (self.rows_selected.length > 0) {
-            $('#deleteCoefficient').removeAttr("disabled");
+            $('#deleteUnitPrice').removeAttr("disabled");
         } else {
-            $('#deleteCoefficient').attr("disabled", "disabled");
+            $('#deleteUnitPrice').attr("disabled", "disabled");
         }
         // Prevent click event from propagating to parent
         e.stopPropagation();
     });
 
     // ấn nút xóa trong dialog
-    $("#deleteCoefficient").click(function (e) {
+    $("#deleteUnitPrice").click(function (e) {
         var id = $("#hdId").val();
         bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
             if (result == true) {
                 $.ajax({
-                    url: Config.Url + 'Coefficient/DeleteCoefficient',
+                    url: Config.Url + 'UnitPrice/DeleteUnitPrice',
                     async: false,
                     data: { 'id': id },
                     type: "POST",
                     success: function (result) {
                         if (result.Status == true) {
                             $.gritter.add({ title: "Quy cách", text: "Xóa Quy cách thành công !", image: "/Images/success.png", class_name: "clean", time: "1500" });
-                            self.RefreshTableUser($(self.coefficientTable), Config.Url + 'Coefficient/GetAllCoefficient');
-                            $("#coefficientModal").modal('hide');
+                            self.RefreshTableUser($(self.unitPriceTable), Config.Url + 'UnitPrice/GetAllUnitPrice');
+                            $("#unitPriceModal").modal('hide');
                         }
                     }
                 });
@@ -281,38 +281,38 @@
         })
     });
 
-    $(self.coefficientTable).on('click', 'tr', function () {
+    $(self.unitPriceTable).on('click', 'tr', function () {
         self.table.$('tr.selected').removeClass('selected');
         $(this).addClass('selected');
     });
 
     // show modal sửa
-    $(self.coefficientTable).on('dblclick', 'tr', function (e) {
+    $(self.unitPriceTable).on('dblclick', 'tr', function (e) {
         var $row = $(this);
         // Get row data
         var data = self.table.row($row).data();
         // Get row ID
         var rowId = data["id"];
         $.ajax({
-            url: Config.Url + 'Coefficient/GetCoefficientById',
+            url: Config.Url + 'UnitPrice/GetUnitPriceById',
             async: false,
             data: { 'id': rowId },
             type: "Get",
             success: function (result) {
                 if (result.Status == true) {
-                    $("#detailCoefficient tbody").empty();
+                    $("#detailUnitPrice tbody").empty();
                     $("#hdId").val(rowId);
-                    $("#txtName").val(result.data.tenheso);
+                    $("#txtCode").val(result.data.madongia);
                     $("#txtDepartment").val(result.data.idbophan);
-                    $("#txtCoefficient").val(result.data.thongso);
+                    $("#txtUnitPrice").val(result.data.dongia);
 
-                    result.Details.forEach(function (item) {
+                    result.data.DetailModel.forEach(function (item) {
                         var tr = $("<tr data-detail='" + item.id + "'></tr>");
                         var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
                         var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
                         var tdSpecification = $("<td></td>");
                         var lbSpecification = $("<label class='.lbSpecification'>" + item.quycachName + "</label>");
-                        var hdSpecification = $("<input type='hidden' class='.hdSpecification'>" + item.idquycach + "</label>");
+                        var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='"+ item.idquycach +"'></label>");
 
                         $(tdSpecification).append(lbSpecification);
                         $(tdSpecification).append(hdSpecification);
@@ -320,16 +320,16 @@
                         $(tr).append(tdTo);
                         $(tr).append(tdSpecification);
 
-                        $("#detailCoefficient tbody").append(tr);
+                        $("#detailUnitPrice tbody").append(tr);
                     })
                 }
             }
         });
-        $("#coefficientModal").modal('show');
+        $("#unitPriceModal").modal('show');
     });
 
     // show modal sửa
-    $("#detailCoefficient").on('dblclick', 'tr', function (e) {
+    $("#detailUnitPrice").on('dblclick', 'tr', function (e) {
         var rowId = $(this).data("detail");
         var rowIndex = e.currentTarget.rowIndex;
         var from = $(this).find(".lbFrom").text();
@@ -341,7 +341,7 @@
         $("#txtFrom").val(from);
         $("#txtTo").val(to);
         $("#txtIdSpecification").val(hdIdSpecification);
-        
-        $("#detailModal").modal('show');
+
+        $("#unitPriceDetailModal").modal('show');
     });
 }

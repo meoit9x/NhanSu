@@ -20,10 +20,21 @@ namespace HRM.Controllers
         /// lấy tất cả chức vụ
         /// </summary>
         /// <returns></returns>
-        public ActionResult GetAllDepartment()
+        public ActionResult GetDepartment()
         {
             var db = new HRMContext();
             var lstChucVu = db.dBoPhans.Where(x => x.isDelete != true).ToList();
+            return Json(new { data = lstChucVu, Status = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// lấy tất cả chức vụ
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetAllDepartment()
+        {
+            var db = new HRMContext();
+            var lstChucVu = db.dBoPhans.Where(x => x.isDelete != true).Select(x => new { x.id, x.tenbophan }).ToList();
             return Json(new { data = lstChucVu, Status = true }, JsonRequestBehavior.AllowGet);
         }
 

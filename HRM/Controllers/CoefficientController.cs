@@ -28,7 +28,8 @@ namespace HRM.Controllers
                 x.id,
                 x.idbophan,
                 x.thongso,
-                x.tenheso
+                x.tenheso,
+                bophan = x.dBoPhan.tenbophan
             }).ToList();
             return Json(new { data = lstHeso, Status = true }, JsonRequestBehavior.AllowGet);
         }
