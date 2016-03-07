@@ -6,6 +6,7 @@ using System.Web.Services;
 using WebSirvce_NS.ObjectR;
 using System.Data.SqlClient;
 using System.Web.Script.Serialization;
+using WebSirvce_NS.Data;
 
 namespace WebSirvce_NS
 {
@@ -21,18 +22,18 @@ namespace WebSirvce_NS
     {
 
         [WebMethod]
-        public List<DataResult> GetData()
+        public List<DataResult> GetData(string from,string to,string makho)
         {
-            FF35_Cord_appEntities db = new FF35_Cord_appEntities();
+            FF35_Cord_sysEntities db = new FF35_Cord_sysEntities();
 
-            var from = new SqlParameter("@From", "2016-03-01");
+            var pfrom = new SqlParameter("@From", from);
 
-            var to = new SqlParameter("@To", "2016-03-31");
+            var _to = new SqlParameter("@To", to);
 
-            var makho = new SqlParameter("@Ma_Kho", "p155");
+            var _makho = new SqlParameter("@Ma_Kho", makho);
 
             var dkho = db.Database
-                .SqlQuery<GetData>("exec Test @From, @To, @Ma_Kho", from, to, makho)
+                .SqlQuery<GetData>("exec Test @From, @To, @Ma_Kho", pfrom, _to, _makho)
                 .ToList();
 
             var dmvt = db.Database
