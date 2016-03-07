@@ -172,10 +172,9 @@ namespace HRM.Controllers
 
                                 db.dDonGiaCTs.Add(ct);
                             }
-
+                            db.SaveChanges();
                         }
-
-                        db.SaveChanges();
+                        
                         scope.Commit();
                         return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                     }
