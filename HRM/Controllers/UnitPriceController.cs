@@ -177,7 +177,7 @@ namespace HRM.Controllers
 
                         db.SaveChanges();
                         scope.Commit();
-                        return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                     }
                     catch (Exception ex)
                     {
