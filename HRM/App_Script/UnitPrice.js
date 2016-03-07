@@ -188,26 +188,47 @@
     // nút lưu detail
     $('#saveDetail').click(function () {
         var item = {};
+        var index = $("#hdRowIndex").val();
+
         item.id = $("#hdIdDetail").val();
         item.tuthongso = $("#txtFrom").val();
         item.denthongso = $("#txtTo").val();
         item.idquycach = $("#txtIdSpecification").val();
 
-        // add item vào list
-        self.listDetail.push(item);
+        if (index != "") {
 
-        var tr = $("<tr></tr>");
-        var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
-        var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
-        var tdSpecification = $("<td></td>");
-        var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification").text() + "</label>");
-        var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></label>");
-        $(tdSpecification).append(lbSpecification);
-        $(tdSpecification).append(hdSpecification);
-        $(tr).append(tdFrom);
-        $(tr).append(tdTo);
-        $(tr).append(tdSpecification);
-        $("#detailUnitPrice tbody").append(tr);
+            var currentItem = self.listDetail.filter(function (value) {
+                return value.id = item.id;
+            })[0];
+            currentItem.tuthongso = item.tuthongso;
+            currentItem.denthongso = item.denthongso;
+            currentItem.idquycach = item.idquycach;
+
+            var current = $("#detailUnitPrice tr").eq(index);
+
+            $(current).find(".lbFrom").text(currentItem.tuthongso);
+            $(current).find(".lbTo").text(currentItem.denthongso);
+            $(current).find(".hdSpecification").val($("#txtIdSpecification").val());
+            $(current).find(".lbSpecification").text($("#txtIdSpecification").text());
+        }
+        else {
+            // add item vào list
+            self.listDetail.push(item);
+
+            var tr = $("<tr></tr>");
+            var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
+            var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
+            var tdSpecification = $("<td></td>");
+            var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification").text() + "</label>");
+            var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></input>");
+            $(tdSpecification).append(lbSpecification);
+            $(tdSpecification).append(hdSpecification);
+            $(tr).append(tdFrom);
+            $(tr).append(tdTo);
+            $(tr).append(tdSpecification);
+            $("#detailUnitPrice tbody").append(tr);
+        }
+        
         $("#unitPriceDetailModal").modal('hide');
     });
 
@@ -308,12 +329,13 @@
 
                     result.data.DetailModel.forEach(function (item) {
                         var tr = $("<tr data-detail='" + item.id + "'></tr>");
-                        var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
-                        var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
+                        var tdFrom = $("<td><label class='lbFrom'>" + item.tuthongso + "</label></td>");
+                        var tdTo = $("<td><label class='lbTo'>" + item.denthongso + "</label></td>");
                         var tdSpecification = $("<td></td>");
-                        var lbSpecification = $("<label class='.lbSpecification'>" + item.quycachName + "</label>");
-                        var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='"+ item.idquycach +"'></label>");
+                        var lbSpecification = $("<label class='lbSpecification'>" + item.quycachName + "</label>");
+                        var hdSpecification = $("<input type='hidden' class='hdSpecification' value='" + item.idquycach + "'></input>");
 
+                        self.listDetail.push(item);
                         $(tdSpecification).append(lbSpecification);
                         $(tdSpecification).append(hdSpecification);
                         $(tr).append(tdFrom);

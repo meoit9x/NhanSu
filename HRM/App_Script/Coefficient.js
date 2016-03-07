@@ -308,11 +308,11 @@
 
                     result.Details.forEach(function (item) {
                         var tr = $("<tr data-detail='" + item.id + "'></tr>");
-                        var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
-                        var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
+                        var tdFrom = $("<td><label class='lbFrom'>" + item.tuthongso + "</label></td>");
+                        var tdTo = $("<td><label class='lbTo'>" + item.denthongso + "</label></td>");
                         var tdSpecification = $("<td></td>");
-                        var lbSpecification = $("<label class='.lbSpecification'>" + item.quycachName + "</label>");
-                        var hdSpecification = $("<input type='hidden' class='.hdSpecification'>" + item.idquycach + "</label>");
+                        var lbSpecification = $("<label class='lbSpecification'>" + item.quycachName + "</label>");
+                        var hdSpecification = $("<input type='hidden' class='hdSpecification'>" + item.idquycach + "</label>");
 
                         $(tdSpecification).append(lbSpecification);
                         $(tdSpecification).append(hdSpecification);

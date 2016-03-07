@@ -159,6 +159,7 @@ namespace HRM.Controllers
                                 ct.denthongso = item.denthongso;
                                 ct.idquycach = item.idquycach;
                                 ct.iddongia = entity.id;
+                                ct.isDelete = item.isDelete;
                             }
                             else
                             {
@@ -167,7 +168,7 @@ namespace HRM.Controllers
                                 ct.denthongso = item.denthongso;
                                 ct.idquycach = item.idquycach;
                                 ct.iddongia = entity.id;
-                                ct.isDelete = item.isDelete;
+                                ct.isDelete = false;
 
                                 db.dDonGiaCTs.Add(ct);
                             }
