@@ -23,7 +23,12 @@ namespace HRM.Controllers
         public ActionResult GetDepartment()
         {
             var db = new HRMContext();
-            var lstChucVu = db.dBoPhans.Where(x => x.isDelete != true).ToList();
+            var lstChucVu = db.dBoPhans.Where(x => x.isDelete != true).Select(x => new { 
+                x.id,
+                x.mabophan,
+                x.tenbophan,
+                x.isproduce
+            }).ToList();
             return Json(new { data = lstChucVu, Status = true }, JsonRequestBehavior.AllowGet);
         }
 
