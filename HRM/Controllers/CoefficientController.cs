@@ -111,9 +111,11 @@ namespace HRM.Controllers
                             modelDetail.quycachName = item.dQuyCach.tenquycach;
                         }
 
-                        modelDetail.isDelete = item.isDelete;
-
-                        lstDetail.Add(modelDetail);
+                        if (item.isDelete != true)
+                        {
+                            lstDetail.Add(modelDetail);
+                        }
+                        
                     }
                     return Json(new { data = Coefficient, Details = lstDetail, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                 }
@@ -167,10 +169,8 @@ namespace HRM.Controllers
 
                                 db.dHeSoCTs.Add(ct);
                             }
-                            
+                            db.SaveChanges();
                         }
-
-                        db.SaveChanges();
                         scope.Commit();
                         return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                     }

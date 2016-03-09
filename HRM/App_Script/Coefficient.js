@@ -198,21 +198,16 @@
             var currentItem = self.listDetail.filter(function (value) {
                 return value.id = item.id;
             })[0];
-            currentItem.tuthongso = item.tuthongso;
-            currentItem.denthongso = item.denthongso;
-            currentItem.idquycach = item.idquycach;
+            var remove = self.listDetail.indexOf(currentItem)
+            self.listDetail.splice(remove, 1);
 
             var current = $("#detailUnitPrice tr").eq(index);
-            debugger;
-            $(current).find(".lbFrom").text(currentItem.tuthongso);
-            $(current).find(".lbTo").text(currentItem.denthongso);
+            $(current).find(".lbFrom").text(item.tuthongso);
+            $(current).find(".lbTo").text(item.denthongso);
             $(current).find(".hdSpecification").val($("#txtIdSpecification").val());
             $(current).find(".lbSpecification").text($("#txtIdSpecification option:selected").text());
         }
         else {
-            // add item vào list
-            self.listDetail.push(item);
-
             var tr = $("<tr></tr>");
             var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
             var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
@@ -226,7 +221,7 @@
             $(tr).append(tdSpecification);
             $("#detailCoefficient tbody").append(tr);
         }
-        
+        self.listDetail.push(item);
         $("#detailModal").modal('hide');
     });
 
@@ -289,13 +284,25 @@
 
     $("#deleteDetail").click(function (e) {
         var id = $("#hdIdDetail").val();
+        var index = $("#hdRowIndex").val();
+
         bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
             if (result == true) {
                 var detail = self.listDetail.filter(function (item) {
                     return item.id == id;
                 })[0];
+                var remove = self.listDetail.indexOf(detail);
+                self.listDetail.splice(remove, 1);
 
-                detail.isDelete = true;
+                var item = {};
+                item.id = $("#hdIdDetail").val();
+                item.tuthongso = $("#txtFrom").val();
+                item.denthongso = $("#txtTo").val();
+                item.idquycach = $("#txtIdSpecification").val();
+                item.isDelete = true;
+
+                $("#detailCoefficient tr").eq(index).remove();
+                $("#detailModal").modal('hide');
             }
         })
     });
