@@ -271,7 +271,6 @@
                     type: "POST",
                     success: function (result) {
                         if (result.Status == true) {
-                            $.gritter.add({ title: "Quy cách", text: "Xóa Quy cách thành công !", image: "/Images/success.png", class_name: "clean", time: "1500" });
                             self.RefreshTableUser($(self.unitPriceTable), Config.Url + 'UnitPrice/GetAllUnitPrice');
                             $("#unitPriceModal").modal('hide');
                         }
