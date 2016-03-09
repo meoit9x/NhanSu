@@ -188,26 +188,45 @@
     // nút lưu detail
     $('#saveDetail').click(function () {
         var item = {};
+        var index = $("#hdRowIndex").val();
         item.id = $("#hdIdDetail").val();
         item.tuthongso = $("#txtFrom").val();
         item.denthongso = $("#txtTo").val();
         item.idquycach = $("#txtIdSpecification").val();
 
-        // add item vào list
-        self.listDetail.push(item);
+        if (index != "") {
+            var currentItem = self.listDetail.filter(function (value) {
+                return value.id = item.id;
+            })[0];
+            currentItem.tuthongso = item.tuthongso;
+            currentItem.denthongso = item.denthongso;
+            currentItem.idquycach = item.idquycach;
 
-        var tr = $("<tr></tr>");
-        var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
-        var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
-        var tdSpecification = $("<td></td>");
-        var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification").text() + "</label>");
-        var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></label>");
-        $(tdSpecification).append(lbSpecification);
-        $(tdSpecification).append(hdSpecification);
-        $(tr).append(tdFrom);
-        $(tr).append(tdTo);
-        $(tr).append(tdSpecification);
-        $("#detailCoefficient tbody").append(tr);
+            var current = $("#detailUnitPrice tr").eq(index);
+            debugger;
+            $(current).find(".lbFrom").text(currentItem.tuthongso);
+            $(current).find(".lbTo").text(currentItem.denthongso);
+            $(current).find(".hdSpecification").val($("#txtIdSpecification").val());
+            $(current).find(".lbSpecification").text($("#txtIdSpecification option:selected").text());
+        }
+        else {
+            // add item vào list
+            self.listDetail.push(item);
+
+            var tr = $("<tr></tr>");
+            var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
+            var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
+            var tdSpecification = $("<td></td>");
+            var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification option:selected").text() + "</label>");
+            var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></label>");
+            $(tdSpecification).append(lbSpecification);
+            $(tdSpecification).append(hdSpecification);
+            $(tr).append(tdFrom);
+            $(tr).append(tdTo);
+            $(tr).append(tdSpecification);
+            $("#detailCoefficient tbody").append(tr);
+        }
+        
         $("#detailModal").modal('hide');
     });
 

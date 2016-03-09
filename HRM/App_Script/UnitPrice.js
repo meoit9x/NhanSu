@@ -189,37 +189,29 @@
     $('#saveDetail').click(function () {
         var item = {};
         var index = $("#hdRowIndex").val();
-
         item.id = $("#hdIdDetail").val();
         item.tuthongso = $("#txtFrom").val();
         item.denthongso = $("#txtTo").val();
         item.idquycach = $("#txtIdSpecification").val();
-
         if (index != "") {
-
             var currentItem = self.listDetail.filter(function (value) {
                 return value.id = item.id;
             })[0];
-            currentItem.tuthongso = item.tuthongso;
-            currentItem.denthongso = item.denthongso;
-            currentItem.idquycach = item.idquycach;
+            var remove = self.listDetail.indexOf(currentItem)
+            self.listDetail.splice(remove, 1);
 
             var current = $("#detailUnitPrice tr").eq(index);
-
-            $(current).find(".lbFrom").text(currentItem.tuthongso);
-            $(current).find(".lbTo").text(currentItem.denthongso);
+            $(current).find(".lbFrom").text(item.tuthongso);
+            $(current).find(".lbTo").text(item.denthongso);
             $(current).find(".hdSpecification").val($("#txtIdSpecification").val());
-            $(current).find(".lbSpecification").text($("#txtIdSpecification").text());
+            $(current).find(".lbSpecification").text($("#txtIdSpecification option:selected").text());
         }
         else {
-            // add item vào list
-            self.listDetail.push(item);
-
             var tr = $("<tr></tr>");
             var tdFrom = $("<td><label class='.lbFrom'>" + item.tuthongso + "</label></td>");
             var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
             var tdSpecification = $("<td></td>");
-            var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification").text() + "</label>");
+            var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification option:selected").text() + "</label>");
             var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></input>");
             $(tdSpecification).append(lbSpecification);
             $(tdSpecification).append(hdSpecification);
@@ -228,7 +220,7 @@
             $(tr).append(tdSpecification);
             $("#detailUnitPrice tbody").append(tr);
         }
-        
+        self.listDetail.push(item);
         $("#unitPriceDetailModal").modal('hide');
     });
 
@@ -291,13 +283,26 @@
 
     $("#deleteDetail").click(function (e) {
         var id = $("#hdIdDetail").val();
+        var index = $("#hdRowIndex").val();
+        
         bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
             if (result == true) {
                 var detail = self.listDetail.filter(function (item) {
                     return item.id == id;
                 })[0];
+                var remove = self.listDetail.indexOf(detail);
+                self.listDetail.splice(remove, 1);
 
-                detail.isDelete = true;
+                var item = {};
+                item.id = $("#hdIdDetail").val();
+                item.tuthongso = $("#txtFrom").val();
+                item.denthongso = $("#txtTo").val();
+                item.idquycach = $("#txtIdSpecification").val();
+                item.isDelete = true;
+                
+                self.listDetail.push(item);
+                $("#unitPriceDetailModal").modal('hide');
+                $("#detailUnitPrice tr").eq(index).remove();
             }
         })
     });
@@ -309,6 +314,7 @@
 
     // show modal sửa
     $(self.unitPriceTable).on('dblclick', 'tr', function (e) {
+        
         var $row = $(this);
         // Get row data
         var data = self.table.row($row).data();
@@ -321,6 +327,7 @@
             type: "Get",
             success: function (result) {
                 if (result.Status == true) {
+                    self.listDetail = [];
                     $("#detailUnitPrice tbody").empty();
                     $("#hdId").val(rowId);
                     $("#txtCode").val(result.data.madongia);

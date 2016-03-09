@@ -115,9 +115,10 @@ namespace HRM.Controllers
                             modelDetail.quycachName = item.dQuyCach.tenquycach;
                         }
 
-                        modelDetail.isDelete = item.isDelete;
-
-                        model.DetailModel.Add(modelDetail);
+                        if (item.isDelete != true)
+                        {
+                            model.DetailModel.Add(modelDetail);
+                        }
                     }
                     return Json(new { data = model, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                 }
@@ -154,7 +155,7 @@ namespace HRM.Controllers
                             dDonGiaCT ct;
                             if (item.id != null)
                             {
-                                ct = db.dDonGiaCTs.FirstOrDefault(x => x.id == model.id);
+                                ct = db.dDonGiaCTs.FirstOrDefault(x => x.id == item.id);
                                 ct.tuthongso = item.tuthongso;
                                 ct.denthongso = item.denthongso;
                                 ct.idquycach = item.idquycach;
@@ -169,12 +170,10 @@ namespace HRM.Controllers
                                 ct.idquycach = item.idquycach;
                                 ct.iddongia = entity.id;
                                 ct.isDelete = false;
-
                                 db.dDonGiaCTs.Add(ct);
                             }
                             db.SaveChanges();
                         }
-                        
                         scope.Commit();
                         return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                     }
