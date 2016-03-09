@@ -98,6 +98,13 @@ namespace HRM.Controllers
                 {
                     List<CoefficientDetailModel> lstDetail = new List<CoefficientDetailModel>();
                     var Coefficient = db.dHeSoes.FirstOrDefault(x => x.id == id);
+
+                    CoefficientModel model = new CoefficientModel();
+                    model.id = Coefficient.id;
+                    model.thongso = Coefficient.thongso;
+                    model.tenheso = Coefficient.tenheso;
+                    model.idbophan = Coefficient.idbophan;
+
                     foreach (var item in Coefficient.dHeSoCTs)
                     {
                         CoefficientDetailModel modelDetail = new CoefficientDetailModel();
@@ -117,7 +124,7 @@ namespace HRM.Controllers
                         }
                         
                     }
-                    return Json(new { data = Coefficient, Details = lstDetail, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { data = model, Details = lstDetail, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
@@ -151,7 +158,7 @@ namespace HRM.Controllers
                             dHeSoCT ct;
                             if (item.id != null)
                             {
-                                ct = db.dHeSoCTs.FirstOrDefault(x => x.id == model.id);
+                                ct = db.dHeSoCTs.FirstOrDefault(x => x.id == item.id);
                                 ct.tuthongso = item.tuthongso;
                                 ct.denthongso = item.denthongso;
                                 ct.idquycach = item.idquycach;
@@ -172,7 +179,7 @@ namespace HRM.Controllers
                             db.SaveChanges();
                         }
                         scope.Commit();
-                        return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+                        return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                     }
                     catch (Exception ex)
                     {
@@ -198,7 +205,7 @@ namespace HRM.Controllers
                 entity.isDelete = true;
                 db.SaveChanges();
 
-                return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

@@ -154,7 +154,7 @@
                 url: Config.Url + 'Coefficient/AddCoefficient',
                 async: false,
                 data: {
-                    tenheso: tenheso, thongso: thongso, idbophan: idbophan, detailModel: self.listDetail
+                    tenheso: tenheso, thongso: thongso, idbophan: idbophan, DetailModel: self.listDetail
                 },
                 type: "POST",
                 success: function (result) {
@@ -213,7 +213,7 @@
             var tdTo = $("<td><label class='.lbTo'>" + item.denthongso + "</label></td>");
             var tdSpecification = $("<td></td>");
             var lbSpecification = $("<label class='.lbSpecification'>" + $("#txtIdSpecification option:selected").text() + "</label>");
-            var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></label>");
+            var hdSpecification = $("<input type='hidden' class='.hdSpecification' value='" + $("#txtIdSpecification").val() + "'></input>");
             $(tdSpecification).append(lbSpecification);
             $(tdSpecification).append(hdSpecification);
             $(tr).append(tdFrom);
@@ -263,6 +263,7 @@
     // ấn nút xóa trong dialog
     $("#deleteCoefficient").click(function (e) {
         var id = $("#hdId").val();
+        debugger;
         bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
             if (result == true) {
                 $.ajax({
@@ -275,6 +276,9 @@
                             $.gritter.add({ title: "Quy cách", text: "Xóa Quy cách thành công !", image: "/Images/success.png", class_name: "clean", time: "1500" });
                             self.RefreshTableUser($(self.coefficientTable), Config.Url + 'Coefficient/GetAllCoefficient');
                             $("#coefficientModal").modal('hide');
+                        }
+                        else {
+                            alert("lỗi");
                         }
                     }
                 });
@@ -300,7 +304,7 @@
                 item.denthongso = $("#txtTo").val();
                 item.idquycach = $("#txtIdSpecification").val();
                 item.isDelete = true;
-
+                self.listDetail.push(item);
                 $("#detailCoefficient tr").eq(index).remove();
                 $("#detailModal").modal('hide');
             }
@@ -326,6 +330,7 @@
             type: "Get",
             success: function (result) {
                 if (result.Status == true) {
+                    self.listDetail = [];
                     $("#detailCoefficient tbody").empty();
                     $("#hdId").val(rowId);
                     $("#txtName").val(result.data.tenheso);
@@ -338,14 +343,14 @@
                         var tdTo = $("<td><label class='lbTo'>" + item.denthongso + "</label></td>");
                         var tdSpecification = $("<td></td>");
                         var lbSpecification = $("<label class='lbSpecification'>" + item.quycachName + "</label>");
-                        var hdSpecification = $("<input type='hidden' class='hdSpecification'>" + item.idquycach + "</label>");
+                        var hdSpecification = $("<input type='hidden' class='hdSpecification' value='"+ item.idquycach +"'></input>");
 
                         $(tdSpecification).append(lbSpecification);
                         $(tdSpecification).append(hdSpecification);
                         $(tr).append(tdFrom);
                         $(tr).append(tdTo);
                         $(tr).append(tdSpecification);
-
+                        self.listDetail.push(item);
                         $("#detailCoefficient tbody").append(tr);
                     })
                 }
