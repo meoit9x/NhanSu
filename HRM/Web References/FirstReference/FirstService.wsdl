@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="to" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="makho" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataResult" type="tns:ArrayOfDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDataResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataResult" nillable="true" type="tns:DataResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="kho" type="tns:GetData" />
+          <s:element minOccurs="0" maxOccurs="1" name="dmvt" type="tns:DMVT" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GetData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="stt" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ma_kho" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ma_vt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ten_vt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ten_vt2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="dvt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nh_vt1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nh_vt2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nh_vt3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="loai_vt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ma_nt" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="so_luong" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="tien" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="tien_nt" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="sl_hop" nillable="true" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DMVT">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ma_vt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ten_vt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ma_td1" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="sl_td1" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="packs" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="tlc" nillable="true" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FirstServiceSoap">
+    <wsdl:operation name="GetData">
+      <wsdl:input message="tns:GetDataSoapIn" />
+      <wsdl:output message="tns:GetDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FirstServiceSoap" type="tns:FirstServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FirstServiceSoap12" type="tns:FirstServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap12:operation soapAction="http://tempuri.org/GetData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FirstService">
+    <wsdl:port name="FirstServiceSoap" binding="tns:FirstServiceSoap">
+      <soap:address location="http://117.6.128.116:1005/Service/FirstService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FirstServiceSoap12" binding="tns:FirstServiceSoap12">
+      <soap12:address location="http://117.6.128.116:1005/Service/FirstService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
