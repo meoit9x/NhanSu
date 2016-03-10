@@ -90,8 +90,7 @@ namespace HRM.Data
                 .HasForeignKey(e => e.idcty);
 
             modelBuilder.Entity<dDonGia>()
-                .Property(e => e.madongia)
-                .IsUnicode(false);
+                .Property(e => e.madongia);
 
             modelBuilder.Entity<dDonGia>()
                 .Property(e => e.nguoitao)

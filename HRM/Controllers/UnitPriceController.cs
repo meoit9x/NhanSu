@@ -56,18 +56,21 @@ namespace HRM.Controllers
 
                         db.SaveChanges();
 
-                        foreach (var item in model.DetailModel)
+                        if (model.DetailModel.Count > 0)
                         {
-                            dDonGiaCT ct = new dDonGiaCT();
-                            ct.tuthongso = item.tuthongso;
-                            ct.denthongso = item.denthongso;
-                            ct.idquycach = item.idquycach;
-                            ct.iddongia = heso.id;
+                            foreach (var item in model.DetailModel)
+                            {
+                                dDonGiaCT ct = new dDonGiaCT();
+                                ct.tuthongso = item.tuthongso;
+                                ct.denthongso = item.denthongso;
+                                ct.idquycach = item.idquycach;
+                                ct.iddongia = heso.id;
 
-                            db.dDonGiaCTs.Add(ct);
+                                db.dDonGiaCTs.Add(ct);
+                            }
+
+                            db.SaveChanges();
                         }
-
-                        db.SaveChanges();
 
                         scope.Commit();
 

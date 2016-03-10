@@ -201,8 +201,8 @@
             self.listDetail.splice(remove, 1);
 
             var current = $("#detailUnitPrice tr").eq(index);
-            $(current).find(".lbFrom").text(item.tuthongso);
-            $(current).find(".lbTo").text(item.denthongso);
+            $(current).find(".lbFrom").text(item.tuthongso == null ? "" : item.tuthongso);
+            $(current).find(".lbTo").text(item.denthongso == null ? "" : item.denthongso);
             $(current).find(".hdSpecification").val($("#txtIdSpecification").val());
             $(current).find(".lbSpecification").text($("#txtIdSpecification option:selected").text());
         }
@@ -332,11 +332,10 @@
                     $("#txtCode").val(result.data.madongia);
                     $("#txtDepartment").val(result.data.idbophan);
                     $("#txtUnitPrice").val(result.data.dongia);
-
                     result.data.DetailModel.forEach(function (item) {
                         var tr = $("<tr data-detail='" + item.id + "'></tr>");
-                        var tdFrom = $("<td><label class='lbFrom'>" + item.tuthongso + "</label></td>");
-                        var tdTo = $("<td><label class='lbTo'>" + item.denthongso + "</label></td>");
+                        var tdFrom = $("<td><label class='lbFrom'>" + (item.tuthongso == null ? "" : item.tuthongso) + "</label></td>");
+                        var tdTo = $("<td><label class='lbTo'>" + (item.denthongso == null ? "" : item.denthongso) + "</label></td>");
                         var tdSpecification = $("<td></td>");
                         var lbSpecification = $("<label class='lbSpecification'>" + item.quycachName + "</label>");
                         var hdSpecification = $("<input type='hidden' class='hdSpecification' value='" + item.idquycach + "'></input>");

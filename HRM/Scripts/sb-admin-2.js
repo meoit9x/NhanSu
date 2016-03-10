@@ -35,10 +35,10 @@ $(function () {
         var tab = $('#iframeTab');
         var content = $('#iframeContent');
 
-        $(tab).find('li').removeClass("active");
-        $(content).find('div').removeClass("active in");
-
         if (id) {
+            $(tab).find('li').removeClass("active");
+            $(content).find('div').removeClass("active in");
+
             var a = $(tab).find("a[href=#" + id + "]");
             var div = $(content).find("#" + id);
 
@@ -72,7 +72,7 @@ $(function () {
         var content = $('#iframeContent');
         var id = $(this).parent().data('iframe');
         var div = $(content).find("#" + id);
-
+        debugger;
         $(this).parent().parent().remove();
         $(div).remove();
         $(".nav-tabs li").children('a').first().click();

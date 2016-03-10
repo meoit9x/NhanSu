@@ -24,7 +24,8 @@ namespace HRM.Controllers
         public ActionResult GetAllCoefficient()
         {
             var db = new HRMContext();
-            var lstHeso = db.dHeSoes.Where(x => x.isDelete != true).Select(x => new {
+            var lstHeso = db.dHeSoes.Where(x => x.isDelete != true).Select(x => new
+            {
                 x.id,
                 x.idbophan,
                 x.thongso,
@@ -58,18 +59,21 @@ namespace HRM.Controllers
 
                         db.SaveChanges();
 
-                        foreach (var item in model.DetailModel)
+                        if (model.DetailModel.Count > 0)
                         {
-                            dHeSoCT ct = new dHeSoCT();
-                            ct.tuthongso = item.tuthongso;
-                            ct.denthongso = item.denthongso;
-                            ct.idquycach = item.idquycach;
-                            ct.idHeSo = heso.id;
+                            foreach (var item in model.DetailModel)
+                            {
+                                dHeSoCT ct = new dHeSoCT();
+                                ct.tuthongso = item.tuthongso;
+                                ct.denthongso = item.denthongso;
+                                ct.idquycach = item.idquycach;
+                                ct.idHeSo = heso.id;
 
-                            db.dHeSoCTs.Add(ct);
+                                db.dHeSoCTs.Add(ct);
+                            }
+
+                            db.SaveChanges();
                         }
-
-                        db.SaveChanges();
 
                         scope.Commit();
 
@@ -122,7 +126,7 @@ namespace HRM.Controllers
                         {
                             lstDetail.Add(modelDetail);
                         }
-                        
+
                     }
                     return Json(new { data = model, Details = lstDetail, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
                 }
