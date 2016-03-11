@@ -78,7 +78,7 @@
         });
     }
 
-    self.LoadSpecification = function (){
+    self.LoadSpecification = function () {
         $.ajax({
             url: Config.Url + 'Specification/GetAllSpecification',
             async: false,
@@ -119,7 +119,7 @@
         $("#detailCoefficient tbody").empty();
         $("#coefficientModal").modal('show');
     });
-
+    
     $("#addDetail").click(function () {
         $("#hdIdDetail").val("");
         $("#txtFrom").val("");
@@ -144,11 +144,12 @@
 
     // nút lưu
     $('#saveCoefficient').click(function () {
+        parent.ShowLoading();
         var id = $("#hdId").val();
         var tenheso = $("#txtName").val();
         var thongso = $("#txtCoefficient").val();
         var idbophan = $("#txtDepartment").val();
-        
+
         if (!id) {
             $.ajax({
                 url: Config.Url + 'Coefficient/AddCoefficient',
@@ -163,6 +164,10 @@
                         self.RefreshTableUser($(self.coefficientTable), '/Coefficient/GetAllCoefficient');
                         $("#coefficientModal").modal('hide');
                     }
+                    parent.HideLoading();
+                },
+                error: function () {
+                    parent.HideLoading();
                 }
             });
         }
@@ -180,6 +185,10 @@
                         self.RefreshTableUser($(self.coefficientTable), '/Coefficient/GetAllCoefficient');
                         $("#coefficientModal").modal('hide');
                     }
+                    parent.HideLoading();
+                },
+                error: function () {
+                    parent.HideLoading();
                 }
             });
         }
@@ -263,7 +272,6 @@
     // ấn nút xóa trong dialog
     $("#deleteCoefficient").click(function (e) {
         var id = $("#hdId").val();
-        debugger;
         bootbox.confirm("Bạn muốn xóa những đối tượng vừa chọn?", function (result) {
             if (result == true) {
                 $.ajax({
@@ -275,9 +283,6 @@
                         if (result.Status == true) {
                             self.RefreshTableUser($(self.coefficientTable), Config.Url + 'Coefficient/GetAllCoefficient');
                             $("#coefficientModal").modal('hide');
-                        }
-                        else {
-                            alert("lỗi");
                         }
                     }
                 });
@@ -317,6 +322,7 @@
 
     // show modal sửa
     $(self.coefficientTable).on('dblclick', 'tr', function (e) {
+        parent.ShowLoading();
         var $row = $(this);
         // Get row data
         var data = self.table.row($row).data();
@@ -342,7 +348,7 @@
                         var tdTo = $("<td><label class='lbTo'>" + item.denthongso == null ? "" : item.denthongso + "</label></td>");
                         var tdSpecification = $("<td></td>");
                         var lbSpecification = $("<label class='lbSpecification'>" + item.quycachName + "</label>");
-                        var hdSpecification = $("<input type='hidden' class='hdSpecification' value='"+ item.idquycach +"'></input>");
+                        var hdSpecification = $("<input type='hidden' class='hdSpecification' value='" + item.idquycach + "'></input>");
 
                         $(tdSpecification).append(lbSpecification);
                         $(tdSpecification).append(hdSpecification);
@@ -351,7 +357,9 @@
                         $(tr).append(tdSpecification);
                         self.listDetail.push(item);
                         $("#detailCoefficient tbody").append(tr);
-                    })
+                    });
+
+                    parent.HideLoading();
                 }
             }
         });
@@ -371,7 +379,7 @@
         $("#txtFrom").val(from);
         $("#txtTo").val(to);
         $("#txtIdSpecification").val(hdIdSpecification);
-        
+
         $("#detailModal").modal('show');
     });
 }

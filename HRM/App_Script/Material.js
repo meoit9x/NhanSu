@@ -1,12 +1,8 @@
 ﻿function Material() {
     var self = this;
 
-    // chạy khi page nó load
-    self.init = function () {
-        self.LoadSpecification();
-    }
-
     $("#search").click(function () {
+        parent.ShowLoading();
         var from = $("#txtFrom").val();
         var to = $("#txtTo").val();
         var code = $("#txtCode").val();
@@ -32,6 +28,7 @@
                         $(tr).append("<td>" + (value.dmvt == null ? "" : value.dmvt.tlc) + "</td>");
                         $("#material tbody").append(tr);
                     });
+                    parent.HideLoading();
                 }
             }
         });

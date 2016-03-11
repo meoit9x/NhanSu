@@ -15,7 +15,7 @@
     <AssemblyName>HRM</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -43,6 +43,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -108,6 +112,7 @@
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
@@ -162,6 +167,7 @@
     <Compile Include="Controllers\CoefficientController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -185,82 +191,51 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\UnitPriceModel.cs" />
     <Compile Include="Models\CoefficientModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\SpecificationModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PositionModel.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Web References\FirstReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Script\Coefficient.js" />
     <Content Include="App_Script\Department.js" />
+    <Content Include="App_Script\Material.js" />
+    <Content Include="App_Script\UnitPrice.js" />
     <Content Include="App_Script\Specification.js" />
     <Content Include="App_Script\Menu.js" />
     <Content Include="App_Script\Position.js" />
-    <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
-    <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
-    <Content Include="bin\HRM.dll" />
-    <Content Include="bin\HRM.pdb" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Core.xml" />
-    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.xml" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="bin\Microsoft.AspNet.Identity.Owin.xml" />
-    <Content Include="bin\Microsoft.Owin.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Cookies.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Facebook.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Facebook.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.Google.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Google.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.OAuth.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.Twitter.dll" />
-    <Content Include="bin\Microsoft.Owin.Security.Twitter.xml" />
-    <Content Include="bin\Microsoft.Owin.Security.xml" />
-    <Content Include="bin\Microsoft.Owin.xml" />
-    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
-    <Content Include="bin\Owin.dll" />
-    <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
-    <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
-    <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
-    <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
-    <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
-    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap-rtl.css" />
     <Content Include="Content\bootstrap-rtl.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dataTables.bootstrap.css" />
+    <Content Include="Content\dataTables.responsive.css" />
+    <Content Include="Content\jquery.gritter.css" />
+    <Content Include="Content\metisMenu.min.css" />
+    <Content Include="Content\morris.css" />
     <Content Include="Content\plugins\morris.css" />
+    <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\sb-admin-rtl.css" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\waitMe.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
@@ -270,9 +245,6 @@
     <Content Include="Global.asax" />
     <Content Include="images\arrow.png" />
     <Content Include="images\bg.png" />
-    <Content Include="obj\Debug\HRM.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\HRM.dll" />
-    <Content Include="obj\Debug\HRM.pdb" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -306,8 +278,11 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\HRM.csprojResolveAssemblyReference.cache" />
+    <None Include="Properties\PublishProfiles\HRM.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\dataTables.responsive.js" />
@@ -340,8 +315,15 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
+    <Content Include="Scripts\waitMe.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web References\FirstReference\DataResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\FirstReference\FirstService.disco" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -357,7 +339,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Coefficient\Index.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Organization\Index.cshtml" />
     <Content Include="Views\Position\Index.cshtml" />
@@ -366,10 +347,16 @@
     <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
     <Content Include="Views\Specification\Index.cshtml" />
     <Content Include="Views\UnitPrice\Index.cshtml" />
+    <Content Include="Views\Coefficient\Index.cshtml" />
+    <Content Include="Views\Material\Index.cshtml" />
+    <None Include="Web References\FirstReference\FirstService.wsdl" />
+    <Content Include="Web References\FirstReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -377,6 +364,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://117.6.128.116:1005/Service/FirstService.asmx%3fop=GetData">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\FirstReference\</RelPath>
+      <UpdateFromURL>http://117.6.128.116:1005/Service/FirstService.asmx%3fop=GetData</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>HRM_FirstReference_FirstService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -396,7 +402,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64727</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64727/</IISUrl>
+          <IISUrl>http://localhost/HRM</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
