@@ -37,7 +37,6 @@ namespace HRM.Data
 
         public bool? isDelete { get; set; }
 
-        [ScriptIgnore]
         public virtual dBoPhan dBoPhan { get; set; }
 
         [ScriptIgnore]

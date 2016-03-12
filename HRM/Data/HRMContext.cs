@@ -18,6 +18,7 @@ namespace HRM.Data
         public virtual DbSet<dDonGia> dDonGias { get; set; }
         public virtual DbSet<dDonGiaCT> dDonGiaCTs { get; set; }
         public virtual DbSet<dDonGiaSP> dDonGiaSPs { get; set; }
+        public virtual DbSet<dFQC> dFQCs { get; set; }
         public virtual DbSet<dHeSo> dHeSoes { get; set; }
         public virtual DbSet<dHeSoCT> dHeSoCTs { get; set; }
         public virtual DbSet<dKho> dKhoes { get; set; }
@@ -73,6 +74,10 @@ namespace HRM.Data
                 .HasForeignKey(e => e.idchucvu);
 
             modelBuilder.Entity<dCongTy>()
+                .Property(e => e.macongty)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<dCongTy>()
                 .Property(e => e.nguoitao)
                 .IsUnicode(false);
 
@@ -88,9 +93,6 @@ namespace HRM.Data
                 .HasMany(e => e.dNhanViens)
                 .WithOptional(e => e.dCongTy)
                 .HasForeignKey(e => e.idcty);
-
-            modelBuilder.Entity<dDonGia>()
-                .Property(e => e.madongia);
 
             modelBuilder.Entity<dDonGia>()
                 .Property(e => e.nguoitao)
@@ -120,6 +122,15 @@ namespace HRM.Data
             modelBuilder.Entity<dDonGiaSP>()
                 .Property(e => e.nguoisua)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<dFQC>()
+                .Property(e => e.fmaso)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<dFQC>()
+                .HasMany(e => e.dQuyCaches)
+                .WithOptional(e => e.dFQC)
+                .HasForeignKey(e => e.idFQC);
 
             modelBuilder.Entity<dHeSo>()
                 .Property(e => e.nguoitao)
@@ -163,16 +174,6 @@ namespace HRM.Data
                 .IsUnicode(false);
 
             modelBuilder.Entity<dQuyCach>()
-                .HasMany(e => e.dDonGiaCTs)
-                .WithOptional(e => e.dQuyCach)
-                .HasForeignKey(e => e.idquycach);
-
-            modelBuilder.Entity<dQuyCach>()
-                .HasMany(e => e.dHeSoCTs)
-                .WithOptional(e => e.dQuyCach)
-                .HasForeignKey(e => e.idquycach);
-
-            modelBuilder.Entity<dQuyCach>()
                 .HasMany(e => e.dQuyCachCTs)
                 .WithOptional(e => e.dQuyCach)
                 .HasForeignKey(e => e.idquycach);
@@ -206,6 +207,16 @@ namespace HRM.Data
                 .HasMany(e => e.dQuyCachCTs)
                 .WithOptional(e => e.dSanPham)
                 .HasForeignKey(e => e.idsanpham);
+
+            modelBuilder.Entity<dQuyCach>()
+                .HasMany(e => e.dDonGiaCTs)
+                .WithOptional(e => e.dQuyCach)
+                .HasForeignKey(e => e.idquycach);
+
+            modelBuilder.Entity<dQuyCach>()
+                .HasMany(e => e.dHeSoCTs)
+                .WithOptional(e => e.dQuyCach)
+                .HasForeignKey(e => e.idquycach);
         }
     }
 }

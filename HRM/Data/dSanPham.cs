@@ -5,6 +5,7 @@ namespace HRM.Data
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Script.Serialization;
 
     [Table("dSanPham")]
     public partial class dSanPham
@@ -36,9 +37,11 @@ namespace HRM.Data
 
         public bool? isDelete { get; set; }
 
+        [ScriptIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dDonGiaSP> dDonGiaSPs { get; set; }
 
+        [ScriptIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dQuyCachCT> dQuyCachCTs { get; set; }
     }

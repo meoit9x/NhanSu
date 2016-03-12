@@ -20,6 +20,9 @@ namespace HRM.Data
         [StringLength(200)]
         public string tencongty { get; set; }
 
+        [StringLength(50)]
+        public string macongty { get; set; }
+
         [StringLength(200)]
         public string diachi { get; set; }
 

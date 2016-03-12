@@ -215,6 +215,7 @@
         var data = self.table.row($row).data();
         // Get row ID
         var rowId = data["id"];
+        debugger;
         $.ajax({
             url: Config.Url + 'Department/GetDepartmentById',
             async: false,
@@ -225,7 +226,7 @@
                     $("#hdId").val(rowId);
                     $('#txtCode').val(result.data.mabophan);
                     $('#txtName').val(result.data.tenbophan);
-                    $('#cbSanXuat').prop('checked', result.data.isproduce);
+                    $('#cbSanXuat').prop('checked', result.data.isProduct);
                 }
             }
         });

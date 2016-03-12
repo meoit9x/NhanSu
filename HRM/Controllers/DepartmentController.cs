@@ -81,8 +81,14 @@ namespace HRM.Controllers
             try
             {
                 var db = new HRMContext();
-                var Department = db.dBoPhans.FirstOrDefault(x => x.id == id);
-                return Json(new { data = Department, Status = true }, JsonRequestBehavior.AllowGet);
+                var department = db.dBoPhans.FirstOrDefault(x => x.id == id);
+                DepartmentModel model = new DepartmentModel();
+                model.id = department.id;
+                model.mabophan = department.mabophan;
+                model.tenbophan = department.tenbophan;
+                model.isProduct = department.isproduce.Value;
+
+                return Json(new { data = model, Status = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

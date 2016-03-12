@@ -13,8 +13,6 @@ namespace HRM.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public dQuyCach()
         {
-            dDonGiaCTs = new HashSet<dDonGiaCT>();
-            dHeSoCTs = new HashSet<dHeSoCT>();
             dQuyCachCTs = new HashSet<dQuyCachCT>();
         }
 
@@ -35,6 +33,14 @@ namespace HRM.Data
 
         public bool? isDelete { get; set; }
 
+        public int? idFQC { get; set; }
+
+        public virtual dFQC dFQC { get; set; }
+
+        [ScriptIgnore]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dQuyCachCT> dQuyCachCTs { get; set; }
+
         [ScriptIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dDonGiaCT> dDonGiaCTs { get; set; }
@@ -42,9 +48,5 @@ namespace HRM.Data
         [ScriptIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dHeSoCT> dHeSoCTs { get; set; }
-
-        [ScriptIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dQuyCachCT> dQuyCachCTs { get; set; }
     }
 }
