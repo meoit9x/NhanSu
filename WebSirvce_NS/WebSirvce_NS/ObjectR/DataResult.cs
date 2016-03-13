@@ -9,6 +9,7 @@ namespace WebSirvce_NS.ObjectR
         public GetData kho { get; set; }
 
         public DMVT dmvt { get; set; }
-        
+
+        public GetData kho_sunday { get; set; }
     }
 }
