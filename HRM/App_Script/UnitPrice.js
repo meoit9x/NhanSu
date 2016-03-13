@@ -144,6 +144,7 @@
 
     // nút lưu
     $('#saveUnitPrice').click(function () {
+        parent.ShowLoading();
         var id = $("#hdId").val();
         var madongia = $("#txtCode").val();
         var dongia = $("#txtUnitPrice").val();
@@ -162,6 +163,7 @@
                         alert("Cập nhật thông tin thành công !");
                         self.RefreshTableUser($(self.unitPriceTable), '/UnitPrice/GetAllUnitPrice');
                         $("#unitPriceModal").modal('hide');
+                        parent.HideLoading();
                     }
                 }
             });
@@ -179,6 +181,7 @@
                         alert("Cập nhật thông tin thành công !");
                         self.RefreshTableUser($(self.unitPriceTable), '/UnitPrice/GetAllUnitPrice');
                         $("#unitPriceModal").modal('hide');
+                        parent.HideLoading();
                     }
                 }
             });
@@ -313,7 +316,7 @@
 
     // show modal sửa
     $(self.unitPriceTable).on('dblclick', 'tr', function (e) {
-        
+        parent.ShowLoading();
         var $row = $(this);
         // Get row data
         var data = self.table.row($row).data();
@@ -348,7 +351,9 @@
                         $(tr).append(tdSpecification);
 
                         $("#detailUnitPrice tbody").append(tr);
-                    })
+                    });
+
+                    parent.HideLoading();
                 }
             }
         });
