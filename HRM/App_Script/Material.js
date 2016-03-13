@@ -22,7 +22,7 @@
                         $(tr).append("<td>" + value.kho.ten_vt + "</td>");
                         $(tr).append("<td>" + value.kho.so_luong + "</td>");
                         $(tr).append("<td>" + value.kho.sl_hop + "</td>");
-                        $(tr).append("<td>" + value.kho.sl_hop + "</td>");
+                        $(tr).append("<td>" + (value.kho.sl_hop * (value.dmvt == null ? 0 : value.dmvt.sl_td1)) + "</td>");
                         $("#material tbody").append(tr);
                     });
                     parent.HideLoading();
