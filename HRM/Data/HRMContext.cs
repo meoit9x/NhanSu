@@ -26,7 +26,7 @@ namespace HRM.Data
         public virtual DbSet<dQuyCach> dQuyCaches { get; set; }
         public virtual DbSet<dQuyCachCT> dQuyCachCTs { get; set; }
         public virtual DbSet<dSanPham> dSanPhams { get; set; }
-
+        public virtual DbSet<dKho> dKhoes { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<dBoPhan>()
@@ -217,6 +217,10 @@ namespace HRM.Data
                 .HasMany(e => e.dHeSoCTs)
                 .WithOptional(e => e.dQuyCach)
                 .HasForeignKey(e => e.idquycach);
+
+            modelBuilder.Entity<dKho>()
+                .Property(e => e.masp)
+                .IsUnicode(false);
         }
     }
 }

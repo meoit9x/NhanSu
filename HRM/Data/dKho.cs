@@ -14,8 +14,24 @@ namespace HRM.Data
         [StringLength(50)]
         public string masp { get; set; }
 
-        public long? soluong { get; set; }
+        public double? soluongkg { get; set; }
 
         public DateTime? ngaynhap { get; set; }
+
+        public double? soluonghop { get; set; }
+
+        public double? sl_td { get; set; }
+
+        public double? hsthoi { get; set; }
+
+        public double? dongiathoi { get; set; }
+
+        public double? hskiem { get; set; }
+
+        public double? dgkiem { get; set; }
+
+        public double? hscatdan { get; set; }
+
+        public double? dongiacatdan { get; set; }
     }
 }
