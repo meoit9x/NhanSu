@@ -114,7 +114,7 @@ namespace HRM.Controllers
                 
                 db.SaveChanges();
 
-                return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -137,7 +137,7 @@ namespace HRM.Controllers
                 entity.isDelete = true;
                 db.SaveChanges();
 
-                return Json(new { data = entity, Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
+                return Json(new { Status = true, Message = "Success" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

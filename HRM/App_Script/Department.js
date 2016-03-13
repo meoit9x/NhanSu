@@ -226,7 +226,7 @@
                     $("#hdId").val(rowId);
                     $('#txtCode').val(result.data.mabophan);
                     $('#txtName').val(result.data.tenbophan);
-                    $('#cbSanXuat').prop('checked', result.data.isProduct);
+                    $('#cbSanXuat').attr('checked', result.data.isProduct);
                 }
             }
         });
