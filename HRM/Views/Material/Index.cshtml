@@ -59,17 +59,63 @@
             <tr>
                 <th>#</th>
                 <th>Tên vật tư</th>
-                <th>Số lượng</th>
-                <th>Tiền</th>
-                <th>tien_nt</th>
-                <th>sl_hop</th>
-                <th>ma_td1</th>
-                <th>sl_td1</th>
-                <th>packs</th>
-                <th>tlc</th>
+                <th>Số lượng KG</th>
+                <th>Số lượng hộp</th>
+                <th>Số lượng cái</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="departmentModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="title">Bộ phận</h4>
+            </div>
+            <div class="modal-body" style="padding:10px">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="txtCode" class="col-md-4 control-label">Tên vật tư</label>
+                        <div class="col-md-4">
+                            <label></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtName" class="col-md-4 control-label">Số lượng KG</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="txtName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSanXuat" class="col-md-4 control-label">Số lượng hộp</label>
+                        <div class="checkbox col-md-4">
+                            <label>
+                                <input type="checkbox" id="cbSanXuat">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSanXuat" class="col-md-4 control-label">Số lượng cái</label>
+                        <div class="checkbox col-md-4">
+                            <label>
+                                <input type="checkbox" id="cbSanXuat">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="hdId" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                <button type="button" id="deleteDepartment" class="btn btn-danger">Xóa</button>
+                <button type="button" id="saveDepartment" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
 </div>
 
