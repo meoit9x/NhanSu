@@ -15,7 +15,7 @@
     <AssemblyName>HRM</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -179,6 +179,7 @@
     <Compile Include="Data\dDonGia.cs" />
     <Compile Include="Data\dDonGiaCT.cs" />
     <Compile Include="Data\dDonGiaSP.cs" />
+    <Compile Include="Data\dFQC.cs" />
     <Compile Include="Data\dHeSo.cs" />
     <Compile Include="Data\dHeSoCT.cs" />
     <Compile Include="Data\dKho.cs" />
@@ -402,7 +403,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64727</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/HRM</IISUrl>
+          <IISUrl>http://localhost:64727/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
