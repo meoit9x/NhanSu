@@ -1,7 +1,7 @@
 ﻿function Material() {
     var self = this;
     self.materialTable = $("#material");
-    
+    self.materials = [];
 
     $("#search").click(function () {
         parent.ShowLoading();
@@ -17,42 +17,37 @@
             success: function (result) {
                 if (result.Status == true) {
                     result.data.forEach(function (value) {
-                        var tr = $("<tr></tr>");
+                        var tr = $("<tr data-detail='" + value.kho.ma_vt + "'></tr>");
                         $(tr).append("<td>" + value.kho.stt + "</td>");
                         $(tr).append("<td>" + value.kho.ten_vt + "</td>");
                         $(tr).append("<td>" + value.kho.so_luong + "</td>");
                         $(tr).append("<td>" + value.kho.sl_hop + "</td>");
                         $(tr).append("<td>" + (value.kho.sl_hop * (value.dmvt == null ? 0 : value.dmvt.sl_td1)) + "</td>");
                         $("#material tbody").append(tr);
+                        self.materials.push(value);
                     });
                     parent.HideLoading();
                 }
+
             }
         });
     });
 
-
     // ấn nút sửa trong bảng
     $(self.materialTable).on('dblclick', 'tr', function (e) {
-        var $row = $(this);
-        // Get row data
-        var data = self.table.row($row).data();
-        // Get row ID
-        var rowId = data["id"];
-        $.ajax({
-            url: Config.Url + 'Department/GetDepartmentById',
-            async: false,
-            data: { 'id': rowId },
-            type: "Get",
-            success: function (result) {
-                if (result.Status == true) {
-                    $("#hdId").val(rowId);
-                    $('#txtCode').val(result.data.mabophan);
-                    $('#txtName').val(result.data.tenbophan);
-                    $('#cbSanXuat').attr('checked', result.data.isProduct);
-                }
-            }
-        });
-        $("#departmentModal").modal('show');
+        var rowId = $(this).data("detail");
+
+        var item = self.materials.filter(function (item) {
+            return item.kho.ma_vt == rowId;
+        })[0];
+
+        $('#materialName').text(item.kho.ten_vt);
+        $('#quanlityKG').text(item.kho.so_luong);
+        $('#quanlityBox').text(item.kho.sl_hop);
+        $('#quanlity').text((item.kho.sl_hop * (item.dmvt == null ? 0 : item.dmvt.sl_td1)));
+        $('#materialName').text(item.kho.ten_vt);
+
+        
+        $("#materialModal").modal('show');
     });
 }

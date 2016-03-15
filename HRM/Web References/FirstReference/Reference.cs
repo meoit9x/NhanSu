@@ -136,6 +136,8 @@ namespace HRM.FirstReference {
         
         private DMVT dmvtField;
         
+        private GetData kho_sundayField;
+        
         /// <remarks/>
         public GetData kho {
             get {
@@ -153,6 +155,16 @@ namespace HRM.FirstReference {
             }
             set {
                 this.dmvtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public GetData kho_sunday {
+            get {
+                return this.kho_sundayField;
+            }
+            set {
+                this.kho_sundayField = value;
             }
         }
     }

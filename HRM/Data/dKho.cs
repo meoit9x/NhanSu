@@ -11,8 +11,9 @@ namespace HRM.Data
     {
         public int id { get; set; }
 
-        [StringLength(50)]
         public string masp { get; set; }
+
+        public string tensp { get; set; }
 
         public double? soluongkg { get; set; }
 
@@ -33,5 +34,7 @@ namespace HRM.Data
         public double? hscatdan { get; set; }
 
         public double? dongiacatdan { get; set; }
+
+        public int status { get; set; }
     }
 }

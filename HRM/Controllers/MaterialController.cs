@@ -19,7 +19,7 @@ namespace HRM.Controllers
         public ActionResult Search(string from, string to, string code)
         {
             FirstService s = new FirstService();
-            var list = s.GetData(from, to, code).ToList();
+            List<DataResult> list = s.GetData(from, to, code).ToList();
             return Json(new { data = list, Status = true }, JsonRequestBehavior.AllowGet);
         }
     }

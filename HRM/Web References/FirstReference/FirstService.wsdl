@@ -27,6 +27,7 @@
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="kho" type="tns:GetData" />
           <s:element minOccurs="0" maxOccurs="1" name="dmvt" type="tns:DMVT" />
+          <s:element minOccurs="0" maxOccurs="1" name="kho_sunday" type="tns:GetData" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="GetData">
