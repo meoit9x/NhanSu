@@ -36,5 +36,17 @@ namespace HRM.Data
         public double? dongiacatdan { get; set; }
 
         public int status { get; set; }
+
+        public double? tienthoi { get; set; }
+
+        public double? tiencatdan { get; set; }
+
+        public double? tienkiem { get; set; }
+
+        public double? sdsoluongkg { get; set; }
+
+        public double? sdsoluonghop { get; set; }
+
+        public double? hscn { get; set; }
     }
 }

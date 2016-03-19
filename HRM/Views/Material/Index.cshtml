@@ -2,6 +2,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
+<style>
+    .none-margin
+    {
+        margin-left:0px;
+    }
+</style>
 @section Scripts{
     <script src="~/App_Script/Material.js"></script>
     <script type="text/javascript">
@@ -18,28 +24,38 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label for="txtCode" class="col-md-4 control-label">Từ ngày</label>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="txtFrom">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-12 col-lg-12 none-margin">
+                        <div class="form-horizontal row">
+                            <div class="form-group col-md-2">
+                                
+                                <div class="col-md-12">
+                                    <select  class="form-control" id="sel1">
+                                        @{
+                                            for (int i = 1; i <= 12; i++)
+                                            {
+                                                <option id="txtFrom" value="@i">Tháng @i</option>
+                                            }
+                                        }
+                                    
+                                    
+                                    </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="txtCode" class="col-md-4 control-label">Đến ngày</label>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="txtTo">
+                            <div class="form-group col-md-2">
+                               
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" id="txtTo" value="2016">
+                                    <span style="color:red" id="errorYear"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="txtCode" class="col-md-4 control-label">Mã kho</label>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" id="txtCode">
+                            <div class="form-group col-md-2">
+                                
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" id="txtCode" value="p155">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-4 col-md-4">
+                            <div class="form-group col-md-2">
+                                <div class="col-md-4">
                                     <input type="button" id="search" class="btn btn-primary" value="Tìm">
                                 </div>
                             </div>
@@ -58,14 +74,15 @@
                 <th>#</th>
                 <th>Tên vật tư</th>
                 <th>Số lượng KG</th>
-                <th>Số lượng hộp</th>
                 <th>Số lượng cái</th>
+                <th>Thành tiền thổi</th>
+                <th>Thành tiền kiểm</th>
+                <th>Thành tiền cắt dán</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
 </div>
-
 <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" id="materialModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -73,100 +90,74 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="title">Vật tư</h4>
+                <h4 class="modal-title" id="title"><label id="materialName" class="control-label"></label></h4>
             </div>
             <div class="modal-body" style="padding:10px">
                 <div class="form-horizontal">
-                    <div class="form-group">
-                        <label for="txtCode" class="col-md-4 control-label">Tên vật tư</label>
-                        <div class="col-md-4">
-                            <label id="materialName" class="control-label"></label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtSanXuat" class="col-md-4 control-label">Hệ số thổi</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="materialHsThoi">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtSanXuat" class="col-md-4 control-label">Hệ số kiểm</label>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="materialHsKiem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtSanXuat" class="col-md-4 control-label">Hệ số cắt dán</label>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="materialHsCatDan">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtSanXuat" class="col-md-4 control-label">Đơn giá thổi</label>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="materialDgThoi">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtSanXuat" class="col-md-4 control-label">Đơn giá kiểm</label>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="materialDgKiem">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtSanXuat" class="col-md-4 control-label">Đơn giá cắt dán</label>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="materialDgCatDan">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="pull-right" style="margin-right:30px;">
+                                <input type="button" id="btnSaveSMaterial" class="btn btn-primary" value="Lưu">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txtName" class="col-md-4 control-label">Số lượng KG</label>
-                        <div class="col-md-4">
-                            <label class="control-label" id="quanlityKG" />
-                        </div>
+
+                    <div class="table-responsive">
+                        <table id="smaterial" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th> 
+                                    <th>Số lượng KG</th>
+                                    <th>Số lượng cái</th>
+                                    <th>Thành tiền thổi</th>
+                                    <th>Thành tiền cắt dán</th>
+                                    <th>Thành tiền kiểm</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Số lượng hộp</label>
-                        <div class="col-md-4">
-                            <label class="control-label" id="quanlityBox" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Số lượng cái</label>
-                        <div class="col-md-4">
-                            <label class="control-label" id="quanlity" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="quanlity" class="col-md-4 control-label">Số lượng KG ngày chủ nhật</label>
-                        <div class="col-md-4">
-                            <label class="control-label" id="sdsoluongkg" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="quanlity" class="col-md-4 control-label">Số lượng hộp ngày chủ nhật</label>
-                        <div class="col-md-4">
-                            <label class="control-label" id="sdsoluonghop" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Hệ số thổi</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="hsthoi">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Đơn giá thổi</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="dongiathoi">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">thành tiền thổi</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="thanhtienthoi">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Hệ số kiểm</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="hskiem">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Đơn giá kiểm</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="dgkiem">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">thành tiền kiểm</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="thanhtienthoi">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Hệ số cắt dán</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="hscatdan">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">Đơn giá cắt dán</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="dongiacatdan">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtSanXuat" class="col-md-4 control-label">thành tiền cắt dán</label>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" id="thanhtiencatdan">
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div class="modal-footer">
@@ -177,4 +168,3 @@
         </div>
     </div>
 </div>
-
