@@ -16,7 +16,7 @@
             $("#errorYear").html("Bạn phải nhập số");
             loi++;
         }
-        if($("#txtTo").val() == "")
+        if ($("#txtTo").val() == "" || $("#txtTo").length==0)
         {
             $("#errorYear").html("Bạn không được để rỗng");
             loi++;
@@ -67,28 +67,31 @@
         
     });
 
-    // ấn nút sửa trong bảng
+     //ấn nút sửa trong bảng
     $(self.materialTable).on('dblclick', 'tr', function (e) {
+        $("#smaterial tbody").html("");
         var rowId = $(this).data("detail");
 
         var item = self.materials.filter(function (item) {
             return item.masp == rowId;
         })[0];
-
+        var soluongkg = item.soluongkg;
+        var sdsoluongkg = item.sdsoluongkg;
+        var soluonghop = item.soluonghop;
+        var sdsoluonghop = item.sdsoluonghop;
+        var sl_td = item.sl_td;
         $('#materialName').text(item.tensp);
-        $('#sl').text(item.tensp);
-        $('#materialName').text(item.tensp);
-        
-        var tr = $("<tr data-detail='ngaythuong'></tr>");
+       
+        var tr = $("<tr id='ngaythuong' data-detail='ngaythuong'></tr>");
         $(tr).append("<td>Ngày thường</td>");
-        $(tr).append("<td>" + item.soluongkg + "</td>");
-        $(tr).append("<td>" + item.soluonghop * item.sl_td + "</td>");
+        $(tr).append("<td>" + soluongkg + "</td>");
+        $(tr).append("<td>" + soluonghop * sl_td + "</td>");
         $("#smaterial tbody").append(tr);
 
-        var tr = $("<tr data-detail='ngaychunhat'></tr>");
+        var tr = $("<tr id='ngaychunhat' data-detail='ngaychunhat'></tr>");
         $(tr).append("<td>Ngày chủ nhật</td>");
-        $(tr).append("<td>" + item.sdsoluongkg + "</td>");
-        $(tr).append("<td>" + item.sdsoluonghop * item.sl_td + "</td>");
+        $(tr).append("<td>" + sdsoluongkg + "</td>");
+        $(tr).append("<td>" + sdsoluonghop * sl_td + "</td>");
         $("#smaterial tbody").append(tr);
         
         
@@ -101,10 +104,12 @@
             var dgThoi = $('#materialDgThoi').val();
             var dgKiem = $('#materialDgKiem').val();
             var dgCatDan = $('#materialDgCatDan').val();
-            if(hsThoi == null || hsKiem  == null|| hsCatDan  == null|| dgThoi  == null|| dgKiem  == null|| dgCatDan  == null)
+            if (hsThoi.length == 0 || hsKiem.length == 0 || hsCatDan.length == 0 || dgThoi.length == 0 || dgKiem.length == 0 || dgCatDan.length == 0)
             {
                 alert("Phải nhập đầy đủ thông tin");
-            }else
+                return false;
+            }
+            else
             {
                 $.ajax({
                     url: Config.Url + 'Material/SaveDataList',
@@ -113,21 +118,33 @@
                         hsthoi: hsThoi,
                         hskiem:hsKiem,
                         hscatdan:hsCatDan,
-                        dgthoi:dgThoi,
+                        dongiathoi:dgThoi,
                         dgkiem:dgKiem,
-                        dgcatdan:dgCatDan
+                        dongiacatdan: dgCatDan,
+                        soluongkg:soluongkg,
+                        sdsoluongkg: sdsoluongkg,
+                        soluonghop: soluonghop,
+                        sdsoluonghop: sdsoluonghop,
+                        sl_td:sl_td
                     },
                     type: "POST",
                     success: function (result) {
                         if (result.Status == true) {
-                            alert("Cập nhật thông tin thành công !");
+                            $("#ngaythuong .remove").remove();
+                            $("#ngaychunhat .remove").remove();
+                            $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienThoi + "</td>");
+                            $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienKiem + "</td>");
+                            $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienCD + "</td>");
 
+                            $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienThoi + "</td>");
+                            $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienKiem + "</td>");
+                            $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienCD + "</td>");
                         }
                     }
                 });
             }
        
         });
-    }
-    }
+    });
+}
     

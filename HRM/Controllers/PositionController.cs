@@ -95,12 +95,12 @@ namespace HRM.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult DeletePosition(PositionModel model)
+        public ActionResult DeletePosition(int id)
         {
             try
             {
                 var db = new HRMContext();
-                var entity = db.dChucVus.FirstOrDefault(x => x.id == model.id);
+                var entity = db.dChucVus.FirstOrDefault(x => x.id == id);
                 entity.isDelete = true;
                 db.SaveChanges();
 
