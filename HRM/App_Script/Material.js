@@ -2,7 +2,8 @@
     var self = this;
     self.materialTable = $("#material");
     self.materials = [];
-
+    var item;
+    var i = 0;
     $("#search").click(function () {
         
         var from = $("#txtFrom").val();
@@ -40,10 +41,10 @@
                 type: "Get",
                 success: function (result) {
                     if (result.Status == true) {
-                        var i = 0;
+                        
                         var sl_cai = 0;
                         result.data.forEach(function (value) {
-                            var tr = $("<tr data-detail='" + value.masp + "'></tr>");
+                            var tr = $("<tr  data-detail='" + value.masp + "'></tr>");
                             $(tr).append("<td>" + i + "</td>");
                             $(tr).append("<td>" + value.tensp + "</td>");
                             $(tr).append("<td>" + value.soluongkg + value.sdsoluongkg + "</td>");
@@ -53,8 +54,9 @@
                             $(tr).append("<td>" + (value.tienkiem + value.hscn * value.dongiakiem * value.hskiem * sl_cai) + "</td>");
                             $(tr).append("<td>" + (value.tiencatdan + value.hscn * value.dongiacatdan * value.hscatdan * sl_cai) + "</td>");
                             $("#material tbody").append(tr);
-                            self.materials.push(value);
                             i++;
+                            self.materials.push(value);
+                            
                         });
                         parent.HideLoading();
                     }
@@ -66,15 +68,19 @@
 
         
     });
-
+    
      //ấn nút sửa trong bảng
     $(self.materialTable).on('dblclick', 'tr', function (e) {
+        
+         
+
         $("#smaterial tbody").html("");
         var rowId = $(this).data("detail");
-
-        var item = self.materials.filter(function (item) {
+        
+        item = self.materials.filter(function (item) {
             return item.masp == rowId;
         })[0];
+        
         var soluongkg = item.soluongkg;
         var sdsoluongkg = item.sdsoluongkg;
         var soluonghop = item.soluonghop;
@@ -96,8 +102,9 @@
         
         
         $("#materialModal").modal('show');
-
-        $('#btnSaveSMaterial').click(function (){
+        
+        $('#btnSaveSMaterial').click(function () {
+           
             var hsThoi = $('#materialHsThoi').val();
             var hsKiem = $('#materialHsKiem').val();
             var hsCatDan = $('#materialHsCatDan').val();
@@ -115,6 +122,8 @@
                     url: Config.Url + 'Material/SaveDataList',
                     async: false,
                     data: {
+                        lstKho: self.materials,
+                        masp: item.masp,
                         hsthoi: hsThoi,
                         hskiem:hsKiem,
                         hscatdan:hsCatDan,
@@ -135,15 +144,42 @@
                             $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienThoi + "</td>");
                             $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienKiem + "</td>");
                             $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienCD + "</td>");
-
                             $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienThoi + "</td>");
                             $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienKiem + "</td>");
                             $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienCD + "</td>");
+                            self.materials = null;
+                            self.materials = result.ssLstKhoSearch;
                         }
                     }
                 });
+                
             }
+
+            
        
+        });
+
+        $('#saveDepartment').click(function () {
+            
+            $("#material tbody").html("");
+            self.materials.forEach(function (value) {
+                var tr = $("<tr  data-detail='" + value.masp + "'></tr>");
+                $(tr).append("<td>" + i + "</td>");
+                $(tr).append("<td>" + value.tensp + "</td>");
+                $(tr).append("<td>" + value.soluongkg + value.sdsoluongkg + "</td>");
+                sl_cai = (value.sdsoluonghop + value.soluonghop) * value.sl_td;
+                $(tr).append("<td>" + sl_cai + "</td>");
+                $(tr).append("<td>" + (value.tienthoi) + "</td>");
+                $(tr).append("<td>" + (value.tienkiem) + "</td>");
+                $(tr).append("<td>" + (value.tiencatdan) + "</td>");
+                $("#material tbody").append(tr);
+                i++;
+               
+                $("#material tbody").append(tr);
+                
+            });
+            $("#materialModal").modal('hide');
+
         });
     });
 }

@@ -24,7 +24,7 @@ namespace HRM.Controllers
         {
             FirstService s = new FirstService();
             List<DataResult> list = s.GetData(HRM.Unit.Unit.FirstDayOfMonth(Convert.ToInt32(from), Convert.ToInt32(to)), HRM.Unit.Unit.LastDayOfMOnth(Convert.ToInt32(from), Convert.ToInt32(to)), code).ToList();
-
+            
             foreach (var objResult in list)
             {
                 dKho objKho = new dKho();
@@ -35,9 +35,9 @@ namespace HRM.Controllers
                 objKho.sdsoluongkg = Convert.ToDouble(objResult.kho_sunday.so_luong == null ? 0 : objResult.kho_sunday.so_luong);
                 objKho.soluonghop = Convert.ToDouble(objResult.kho.sl_hop == null ? 0 : objResult.kho.sl_hop);
                 objKho.soluongkg = Convert.ToDouble(objResult.kho.so_luong == null ? 0 : objResult.kho.so_luong);
+                
                 listKhoSearch.Add(objKho);
             }
-
             return Json(new { data = listKhoSearch, Status = true }, JsonRequestBehavior.AllowGet);
         }
 
@@ -63,7 +63,11 @@ namespace HRM.Controllers
             double ngayCNTienThoi = objKhoCN.tienthoi.Value;
             double ngayCNTienKiem = objKhoCN.tienkiem.Value;
             double ngayCNTienCD = objKhoCN.tiencatdan.Value;
-
+            List<dKho> ssLstKhoSearch = models.lstKho;
+            var dKho = ssLstKhoSearch.Find(x=>x.masp == models.masp);
+            dKho.tienthoi = ngayThuongTienThoi + ngayCNTienThoi;
+            dKho.tienkiem = ngayThuongTienKiem + ngayCNTienKiem;
+            dKho.tiencatdan = ngayThuongTienCD + ngayCNTienCD;
             return Json(
                         new {
                                 ngayThuongTienThoi = ngayThuongTienThoi,
@@ -72,6 +76,7 @@ namespace HRM.Controllers
                                 ngayCNTienThoi = ngayCNTienThoi,
                                 ngayCNTienKiem = ngayCNTienKiem,
                                 ngayCNTienCD = ngayCNTienCD,
+                                ssLstKhoSearch = ssLstKhoSearch,
                                 Status = true
                         }, JsonRequestBehavior.AllowGet);
         }
