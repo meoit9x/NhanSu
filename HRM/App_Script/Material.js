@@ -4,6 +4,8 @@
     self.materials = [];
     var item;
     var i = 0;
+    var tienThoiNgayThuong,tienThoiNgayCN,tienKiemNgayThuong,tienKiemNgayCN,tienCatDanNgayThuong,tienCatDanNgayCN = 0;
+
     $("#search").click(function () {
         
         var from = $("#txtFrom").val();
@@ -71,16 +73,11 @@
     
      //ấn nút sửa trong bảng
     $(self.materialTable).on('dblclick', 'tr', function (e) {
-        
-         
-
         $("#smaterial tbody").html("");
-        var rowId = $(this).data("detail");
-        
+        var rowId = $(this).data("detail"); 
         item = self.materials.filter(function (item) {
             return item.masp == rowId;
-        })[0];
-        
+        })[0];  
         var soluongkg = item.soluongkg;
         var sdsoluongkg = item.sdsoluongkg;
         var soluonghop = item.soluonghop;
@@ -139,14 +136,20 @@
                     type: "POST",
                     success: function (result) {
                         if (result.Status == true) {
-                            $("#ngaythuong .remove").remove();
-                            $("#ngaychunhat .remove").remove();
-                            $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienThoi + "</td>");
-                            $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienKiem + "</td>");
-                            $("#ngaythuong").append("<td class='remove'>" + result.ngayThuongTienCD + "</td>");
-                            $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienThoi + "</td>");
-                            $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienKiem + "</td>");
-                            $("#ngaychunhat").append("<td class='remove'>" + result.ngayCNTienCD + "</td>");
+                            tienThoiNgayThuong = result.ngayThuongTienThoi;
+                            tienThoiNgayCN = result.ngayCNTienThoi;
+                            tienKiemNgayThuong = result.ngayThuongTienKiem;
+                            tienKiemNgayCN = result.ngayCNTienKiem;
+                            tienCatDanNgayThuong = result.ngayThuongTienCD;
+                            tienCatDanNgayCN = result.ngayCNTienCD;
+                            //$("#ngaythuong .remove").remove();
+                            //$("#ngaychunhat .remove").remove();
+                            $("#ngaythuong").append("<td class='remove'>" + tienThoiNgayThuong + "</td>");
+                            $("#ngaythuong").append("<td class='remove'>" + tienKiemNgayThuong + "</td>");
+                            $("#ngaythuong").append("<td class='remove'>" + tienCatDanNgayThuong + "</td>");
+                            $("#ngaychunhat").append("<td class='remove'>" + tienThoiNgayCN + "</td>");
+                            $("#ngaychunhat").append("<td class='remove'>" + tienKiemNgayCN + "</td>");
+                            $("#ngaychunhat").append("<td class='remove'>" + tienCatDanNgayCN + "</td>");
                             self.materials = null;
                             self.materials = result.ssLstKhoSearch;
                         }
