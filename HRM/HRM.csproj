@@ -166,6 +166,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CoefficientController.cs" />
+    <Compile Include="Controllers\CoefficientUnstableController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SpecificationController.cs" />
     <Compile Include="Controllers\UnitPriceController.cs" />
+    <Compile Include="Data\dHeSoKON.cs" />
     <Compile Include="Data\dBoPhan.cs" />
     <Compile Include="Data\dChucVu.cs" />
     <Compile Include="Data\dCongTy.cs" />
@@ -217,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Script\Coefficient.js" />
+    <Content Include="App_Script\CoefficientUnstable.js" />
     <Content Include="App_Script\Organization.js" />
     <Content Include="App_Script\Department.js" />
     <Content Include="App_Script\Material.js" />
@@ -326,6 +329,7 @@
     <Content Include="Web References\FirstReference\DataResult.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Views\CoefficientUnstable\Index.cshtml" />
     <None Include="Web References\FirstReference\FirstService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -359,6 +363,7 @@
     <Content Include="Web References\FirstReference\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

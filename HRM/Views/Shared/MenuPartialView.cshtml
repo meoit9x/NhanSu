@@ -5,6 +5,9 @@
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Hệ Thống <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
+                        @Html.ActionLink("Hệ số không ổn định", "Index", "CoefficientUnstable", null, new { @data_name = "Hệ số không ổn định", @data_iframe = "CoefficientUnstable" })
+                    </li>
+                    <li>
                         @Html.ActionLink("Công ty", "Index", "Organization", null, new { @data_name = "Công ty", @data_iframe = "Organization" })
                     </li>
                     <li>

@@ -21,6 +21,7 @@ namespace HRM.Data
         public virtual DbSet<dFQC> dFQCs { get; set; }
         public virtual DbSet<dHeSo> dHeSoes { get; set; }
         public virtual DbSet<dHeSoCT> dHeSoCTs { get; set; }
+        public virtual DbSet<dHeSoKON> dHeSoKONs { get; set; }
         public virtual DbSet<dKho> dKhoes { get; set; }
         public virtual DbSet<dNhanVien> dNhanViens { get; set; }
         public virtual DbSet<dQuyCach> dQuyCaches { get; set; }
