@@ -3,7 +3,6 @@
     self.materialTable = $("#material");
     self.materials = [];
     var item;
-    var i = 0;
     var tienThoiNgayThuong,tienThoiNgayCN,tienKiemNgayThuong,tienKiemNgayCN,tienCatDanNgayThuong,tienCatDanNgayCN = 0;
 
     $("#search").click(function () {
@@ -45,16 +44,17 @@
                     if (result.Status == true) {
                         
                         var sl_cai = 0;
+                        var i = 0;
                         result.data.forEach(function (value) {
                             var tr = $("<tr  data-detail='" + value.masp + "'></tr>");
-                            $(tr).append("<td>" + i + "</td>");
+                            $(tr).append("<td>" + ( i+ 1) + "</td>");
                             $(tr).append("<td>" + value.tensp + "</td>");
-                            $(tr).append("<td>" + value.soluongkg + value.sdsoluongkg + "</td>");
+                            $(tr).append("<td>" + (value.soluongkg + value.sdsoluongkg) + "</td>");
                             sl_cai = (value.sdsoluonghop + value.soluonghop) * value.sl_td;
                             $(tr).append("<td>" + sl_cai + "</td>");
-                            $(tr).append("<td>" + (value.tienthoi + value.hscn * value.dongiathoi * value.hsthoi * value.sdsoluongkg) + "</td>");
-                            $(tr).append("<td>" + (value.tienkiem + value.hscn * value.dongiakiem * value.hskiem * sl_cai) + "</td>");
-                            $(tr).append("<td>" + (value.tiencatdan + value.hscn * value.dongiacatdan * value.hscatdan * sl_cai) + "</td>");
+                            $(tr).append("<td>" + (value.tienthoi + value.sdtienthoi) + "</td>");
+                            $(tr).append("<td>" + (value.tienkiem + value.sdtienkiem) + "</td>");
+                            $(tr).append("<td>" + (value.tiencatdan + value.sdtiencatdan) + "</td>");
                             $("#material tbody").append(tr);
                             i++;
                             self.materials.push(value);
@@ -89,12 +89,18 @@
         $(tr).append("<td>Ngày thường</td>");
         $(tr).append("<td>" + soluongkg + "</td>");
         $(tr).append("<td>" + soluonghop * sl_td + "</td>");
+        $(tr).append("<td>" + (item.tienthoi == null ? 0 : item.tienthoi) + "</td>");
+        $(tr).append("<td>" + (item.tienkiem == null ? 0 : item.tienkiem) + "</td>");
+        $(tr).append("<td>" + (item.tiencatdan == null ? 0 : item.tiencatdan) + "</td>");
         $("#smaterial tbody").append(tr);
 
         var tr = $("<tr id='ngaychunhat' data-detail='ngaychunhat'></tr>");
         $(tr).append("<td>Ngày chủ nhật</td>");
         $(tr).append("<td>" + sdsoluongkg + "</td>");
         $(tr).append("<td>" + sdsoluonghop * sl_td + "</td>");
+        $(tr).append("<td>" + (item.sdtienthoi == null ? 0 : item.sdtienthoi) + "</td>");
+        $(tr).append("<td>" + (item.sdtienkiem == null ? 0 : item.sdtienkiem) + "</td>");
+        $(tr).append("<td>" + (item.sdtiencatdan == null ? 0 : item.sdtiencatdan) + "</td>");
         $("#smaterial tbody").append(tr);
         
         
@@ -136,20 +142,8 @@
                     type: "POST",
                     success: function (result) {
                         if (result.Status == true) {
-                            tienThoiNgayThuong = result.ngayThuongTienThoi;
-                            tienThoiNgayCN = result.ngayCNTienThoi;
-                            tienKiemNgayThuong = result.ngayThuongTienKiem;
-                            tienKiemNgayCN = result.ngayCNTienKiem;
-                            tienCatDanNgayThuong = result.ngayThuongTienCD;
-                            tienCatDanNgayCN = result.ngayCNTienCD;
-                            //$("#ngaythuong .remove").remove();
-                            //$("#ngaychunhat .remove").remove();
-                            $("#ngaythuong").append("<td class='remove'>" + tienThoiNgayThuong + "</td>");
-                            $("#ngaythuong").append("<td class='remove'>" + tienKiemNgayThuong + "</td>");
-                            $("#ngaythuong").append("<td class='remove'>" + tienCatDanNgayThuong + "</td>");
-                            $("#ngaychunhat").append("<td class='remove'>" + tienThoiNgayCN + "</td>");
-                            $("#ngaychunhat").append("<td class='remove'>" + tienKiemNgayCN + "</td>");
-                            $("#ngaychunhat").append("<td class='remove'>" + tienCatDanNgayCN + "</td>");
+
+
                             self.materials = null;
                             self.materials = result.ssLstKhoSearch;
                         }
@@ -165,6 +159,7 @@
         $('#saveDepartment').click(function () {
             
             $("#material tbody").html("");
+            var i = 0;
             self.materials.forEach(function (value) {
                 var tr = $("<tr  data-detail='" + value.masp + "'></tr>");
                 $(tr).append("<td>" + i + "</td>");
@@ -172,9 +167,9 @@
                 $(tr).append("<td>" + value.soluongkg + value.sdsoluongkg + "</td>");
                 sl_cai = (value.sdsoluonghop + value.soluonghop) * value.sl_td;
                 $(tr).append("<td>" + sl_cai + "</td>");
-                $(tr).append("<td>" + (value.tienthoi) + "</td>");
-                $(tr).append("<td>" + (value.tienkiem) + "</td>");
-                $(tr).append("<td>" + (value.tiencatdan) + "</td>");
+                $(tr).append("<td>" + (value.tienthoi + value.sdtienthoi) + "</td>");
+                $(tr).append("<td>" + (value.tienkiem + value.sdtienkiem) + "</td>");
+                $(tr).append("<td>" + (value.tiencatdan + value.sdtiencatdan) + "</td>");
                 $("#material tbody").append(tr);
                 i++;
                

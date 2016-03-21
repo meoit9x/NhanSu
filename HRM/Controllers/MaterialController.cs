@@ -44,38 +44,22 @@ namespace HRM.Controllers
         [HttpPost]
         public ActionResult SaveDataList(MaterialModels models)
         {
-            dKho objKhoNgayThuong = new dKho();
             var slCaiNgayThuong = models.soluonghop * models.sl_td;
-            objKhoNgayThuong.tienthoi = models.soluongkg * models.hsthoi * models.dongiathoi;
-            objKhoNgayThuong.tienkiem = slCaiNgayThuong * models.hskiem * models.dgkiem;
-            objKhoNgayThuong.tiencatdan = slCaiNgayThuong * models.hscatdan * models.dongiacatdan;
-           
-            dKho objKhoCN = new dKho();
+
             var slCaiCN = models.sdsoluonghop * models.sl_td;
-            objKhoCN.tienthoi = models.sdsoluongkg * models.hsthoi * models.dongiathoi;
-            objKhoCN.tienkiem = slCaiCN * models.hskiem * models.dgkiem;
-            objKhoCN.tiencatdan = slCaiCN * models.hscatdan * models.dongiacatdan;
 
-            double ngayThuongTienThoi = objKhoNgayThuong.tienthoi.Value;
-            double ngayThuongTienKiem = objKhoNgayThuong.tienkiem.Value;
-            double ngayThuongTienCD = objKhoNgayThuong.tiencatdan.Value;
 
-            double ngayCNTienThoi = objKhoCN.tienthoi.Value;
-            double ngayCNTienKiem = objKhoCN.tienkiem.Value;
-            double ngayCNTienCD = objKhoCN.tiencatdan.Value;
             List<dKho> ssLstKhoSearch = models.lstKho;
             var dKho = ssLstKhoSearch.Find(x=>x.masp == models.masp);
-            dKho.tienthoi = ngayThuongTienThoi + ngayCNTienThoi;
-            dKho.tienkiem = ngayThuongTienKiem + ngayCNTienKiem;
-            dKho.tiencatdan = ngayThuongTienCD + ngayCNTienCD;
+
+            dKho.tienthoi = models.soluongkg * models.hsthoi * models.dongiathoi;
+            dKho.tienkiem = slCaiNgayThuong * models.hskiem * models.dgkiem;
+            dKho.tiencatdan = slCaiNgayThuong * models.hscatdan * models.dongiacatdan;
+            dKho.sdtienthoi = models.sdsoluongkg * models.hsthoi * models.dongiathoi;
+            dKho.sdtienkiem = slCaiCN * models.hskiem * models.dgkiem;
+            dKho.sdtiencatdan = slCaiCN * models.hscatdan * models.dongiacatdan;
             return Json(
                         new {
-                                ngayThuongTienThoi = ngayThuongTienThoi,
-                                ngayThuongTienKiem = ngayThuongTienKiem,
-                                ngayThuongTienCD = ngayThuongTienCD,
-                                ngayCNTienThoi = ngayCNTienThoi,
-                                ngayCNTienKiem = ngayCNTienKiem,
-                                ngayCNTienCD = ngayCNTienCD,
                                 ssLstKhoSearch = ssLstKhoSearch,
                                 Status = true
                         }, JsonRequestBehavior.AllowGet);

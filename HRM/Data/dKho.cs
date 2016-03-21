@@ -48,5 +48,11 @@ namespace HRM.Data
         public double? sdsoluonghop { get; set; }
 
         public double? hscn { get; set; }
+
+        public double? sdtienthoi { get; set; }
+
+        public double? sdtiencatdan { get; set; }
+
+        public double? sdtienkiem { get; set; }
     }
 }
