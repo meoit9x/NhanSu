@@ -25,8 +25,16 @@
                     <li>
                         @Html.ActionLink("Đơn giá bộ phận", "Index", "UnitPrice", null, new { @data_name = "Đơn giá bộ phận", @data_iframe = "UnitPrice" })
                     </li>
+                   
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-table fa-fw"></i> Tính lương <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+
                     <li>
-                        @Html.ActionLink("Vật tư", "Index", "Material", null, new { @data_name = "Vật tư", @data_iframe = "Material" })
+                        @Html.ActionLink("Lương Sản Phẩm", "Index", "Material", null, new { @data_name = "Sản phẩm", @data_iframe = "Product" })
                     </li>
                 </ul>
             </li>

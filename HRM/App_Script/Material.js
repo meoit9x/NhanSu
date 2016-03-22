@@ -107,7 +107,9 @@
         $("#materialModal").modal('show');
         
         $('#btnSaveSMaterial').click(function () {
-           
+            
+            $('input[type="number"]').val("");
+            $('#materialHsThoi').val("");
             var hsThoi = $('#materialHsThoi').val();
             var hsKiem = $('#materialHsKiem').val();
             var hsCatDan = $('#materialHsCatDan').val();

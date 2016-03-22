@@ -12,7 +12,8 @@ namespace HRM.Controllers
         // GET: CoefficientUnstable
         public ActionResult Index()
         {
-            return View();
+            var db = new HRMContext();
+            return View(db.dHeSoKONs.ToList());
         }
 
         [HttpGet]
@@ -54,23 +55,23 @@ namespace HRM.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult SaveCoefficientUnstable(int heSoTbVal,int id)
-        {
-            try
-            {
-                var db = new HRMContext();
-                var entity = db.dHeSoKONs.FirstOrDefault(x => x.id == id);
-                entity.heso = heSoTbVal;
-                db.SaveChanges();
-                var lstHeSoKON = db.dHeSoKONs.ToList();               
-                return Json(new { Status = true,lstHeSoKON = lstHeSoKON, Message = "Success" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
-            }
+        //[HttpPost]
+        //public ActionResult SaveCoefficientUnstable(int heSoTbVal,int id)
+        //{
+        //    try
+        //    {
+        //        var db = new HRMContext();
+        //        var entity = db.dHeSoKONs.FirstOrDefault(x => x.id == id);
+        //        entity.heso = heSoTbVal;
+        //        db.SaveChanges();
+        //        var lstHeSoKON = db.dHeSoKONs.ToList();               
+        //        return Json(new { Status = true,lstHeSoKON = lstHeSoKON, Message = "Success" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { Status = false, Message = ex.Message }, JsonRequestBehavior.AllowGet);
+        //    }
 
-        }
+        //}
     }
 }
