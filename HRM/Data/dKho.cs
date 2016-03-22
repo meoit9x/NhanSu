@@ -54,5 +54,9 @@ namespace HRM.Data
         public double? sdtiencatdan { get; set; }
 
         public double? sdtienkiem { get; set; }
+
+        public string idcty { get; set; }
+        public string luongthang { get; set; }
+        public int isSunDay { get; set; }
     }
 }

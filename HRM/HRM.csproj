@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SpecificationController.cs" />
     <Compile Include="Controllers\UnitPriceController.cs" />
+    <Compile Include="Data\dDonGiaBQ.cs" />
     <Compile Include="Data\dHeSoKON.cs" />
     <Compile Include="Data\dBoPhan.cs" />
     <Compile Include="Data\dChucVu.cs" />

@@ -19,9 +19,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Tìm kiếm
-            </div>
+            
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-12 col-lg-12 none-margin">
@@ -54,9 +52,15 @@
                                     <input type="text" class="form-control" id="txtCode" value="p155">
                                 </div>
                             </div>
-                            <div class="form-group col-md-2">
-                                <div class="col-md-4">
+                            <div class="form-group col-md-1">
+                                <div class="col-md-2">
                                     <input type="button" id="search" class="btn btn-primary" value="Tìm">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <div class="col-md-2">
+                                    <input type="button" id="viewSum" class="btn btn-success" value="Xem Tổng">
                                 </div>
                             </div>
                         </div>
@@ -99,14 +103,14 @@
                             <div class="form-group">
                                 <label for="txtSanXuat" class="col-md-4 control-label">Hệ số thổi</label>
                                 <div class="col-md-8">
-                                    <input type="text" value="" class="form-control" id="materialHsThoi">
+                                    <input type="text"  class="form-control" id="materialHsThoi">
                                     
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtSanXuat" class="col-md-4 control-label">Hệ số kiểm</label>
                                 <div class="col-md-8">
-                                    <input type="number" value="" class="form-control" id="materialHsKiem">
+                                    <input type="number"  class="form-control" id="materialHsKiem">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -166,6 +170,45 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
                 <button type="button" id="saveDepartment" class="btn btn-primary">Lưu</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="materialModalSumView" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="title"><label id="materialName" class="control-label"></label></h4>
+            </div>
+            <div class="modal-body" style="padding:10px">
+                <div class="form-horizontal">
+                    
+
+                    <div class="table-responsive">
+                        <table id="smaterialSum" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Số lượng KG</th>
+                                    <th>Số lượng cái</th>
+                                    <th>Thành tiền thổi</th>
+                                    <th>Thành tiền kiểm</th>
+                                    <th>Thành tiền cắt dán</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" id="saveDataKho" class="btn btn-primary">Lưu</button>
+            </div>
+            
         </div>
     </div>
 </div>

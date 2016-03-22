@@ -9,7 +9,7 @@ namespace HRM.Models
     public class MaterialModels
     {
         public List<dKho> lstKho { get; set; }
-        
+        public List<dDonGiaBQ> lstDonGiaBQ { get; set; }
         public int id { get; set; }
 
         public string masp { get; set; }
@@ -49,5 +49,9 @@ namespace HRM.Models
         public double? sdsoluonghop { get; set; }
 
         public double? hscn { get; set; }
+
+        public string idcty { get; set; }
+        public string luongthang { get; set; }
+        public int isSunDay { get; set; }
     }
 }

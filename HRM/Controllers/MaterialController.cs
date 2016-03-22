@@ -41,30 +41,128 @@ namespace HRM.Controllers
             return Json(new { data = listKhoSearch, Status = true }, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpPost]
+        public ActionResult ViewSum(MaterialModels models)
+        {
+            var db = new HRMContext();
+            List<dDonGiaBQ> lstDonGia = new List<dDonGiaBQ>();
+            List<dKho> lKho = new List<dKho>();
+            lKho = models.lstKho;
+
+
+            dDonGiaBQ donGiaBQNgayThuong = new dDonGiaBQ();
+            donGiaBQNgayThuong.tongtienthoi = (from kho in lKho select Convert.ToDouble(kho.tienthoi == null ? 0 : kho.tiencatdan)).Sum();
+            donGiaBQNgayThuong.tongtienkiem = (from kho in lKho select Convert.ToDouble(kho.tienkiem == null ? 0 : kho.tiencatdan)).Sum();
+            donGiaBQNgayThuong.tongtiencatdan = (from kho in lKho select Convert.ToDouble(kho.tiencatdan == null ? 0 : kho.tiencatdan)).Sum();
+            donGiaBQNgayThuong.slkg = (from kho in lKho select Convert.ToDouble(kho.soluongkg == null ? 0 : kho.tiencatdan)).Sum();
+            donGiaBQNgayThuong.slcai = (from kho in lKho select Convert.ToDouble(kho.soluonghop.GetValueOrDefault(0)*kho.sl_td.GetValueOrDefault(0))).Sum();
+            donGiaBQNgayThuong.isSunDay = 0;
+            donGiaBQNgayThuong.idcty = models.idcty;
+            donGiaBQNgayThuong.luongthang = models.luongthang;
+            donGiaBQNgayThuong.postion = 1;
+            lstDonGia.Add(donGiaBQNgayThuong);
+
+            dDonGiaBQ donGiaBQNgayCN = new dDonGiaBQ();
+            donGiaBQNgayCN.tongtienthoi = (from kho in lKho select Convert.ToDouble(kho.sdtienthoi == null ? 0 : kho.sdtienthoi)).Sum();
+            donGiaBQNgayCN.tongtienkiem = (from kho in lKho select Convert.ToDouble(kho.sdtienkiem == null ? 0 : kho.sdtienkiem)).Sum();
+            donGiaBQNgayCN.tongtiencatdan = (from kho in lKho select Convert.ToDouble(kho.sdtiencatdan == null ? 0 : kho.sdtiencatdan)).Sum();
+            donGiaBQNgayCN.slkg = (from kho in lKho select Convert.ToDouble(kho.sdsoluongkg == null ? 0 : kho.sdsoluongkg)).Sum();
+            donGiaBQNgayCN.slcai = (from kho in lKho select Convert.ToDouble(kho.sdsoluonghop.GetValueOrDefault(0) * kho.sl_td.GetValueOrDefault(0))).Sum();
+            donGiaBQNgayCN.isSunDay = 1;
+            donGiaBQNgayCN.idcty = models.idcty;
+            donGiaBQNgayCN.luongthang = models.luongthang;
+            donGiaBQNgayCN.postion = 2;
+            lstDonGia.Add(donGiaBQNgayCN);
+
+            dDonGiaBQ donGiaBQNTong = new dDonGiaBQ();
+            donGiaBQNTong.tongtienthoi = donGiaBQNgayCN.tongtienthoi + donGiaBQNgayThuong.tongtienthoi;
+            donGiaBQNTong.tongtienkiem = donGiaBQNgayCN.tongtienkiem + donGiaBQNgayThuong.tongtienkiem;
+            donGiaBQNTong.tongtiencatdan = donGiaBQNgayCN.tongtiencatdan + donGiaBQNgayThuong.tongtiencatdan;
+            donGiaBQNTong.slkg = donGiaBQNgayCN.slkg + donGiaBQNgayThuong.slkg;
+            donGiaBQNTong.slcai = (donGiaBQNgayCN.slcai + donGiaBQNgayThuong.slcai);
+            donGiaBQNTong.isSunDay = 1;
+            donGiaBQNTong.idcty = models.idcty;
+            donGiaBQNTong.luongthang = models.luongthang;
+            donGiaBQNTong.postion = 3;
+            lstDonGia.Add(donGiaBQNTong);
+
+            return Json(
+                        new
+                        {
+                            donGiaBQNgayThuong = donGiaBQNgayThuong,
+                            donGiaBQNgayCN = donGiaBQNgayCN,
+                            donGiaBQNTong = donGiaBQNTong,
+                            Status = true,
+                           
+                        }, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult SaveDataList(MaterialModels models)
         {
+            var db = new HRMContext();
             var slCaiNgayThuong = models.soluonghop * models.sl_td;
 
             var slCaiCN = models.sdsoluonghop * models.sl_td;
 
 
             List<dKho> ssLstKhoSearch = models.lstKho;
-            var dKho = ssLstKhoSearch.Find(x=>x.masp == models.masp);
-
+            var dKho = ssLstKhoSearch.Find(x => x.masp == models.masp);
+            dKho.soluongkg = models.soluongkg;
+            dKho.ngaynhap = DateTime.Now;
+            dKho.soluonghop = models.soluonghop;
+            dKho.sl_td = models.sl_td;
+            dKho.hsthoi = models.hsthoi;
+            dKho.dongiathoi = models.dongiathoi;
+            dKho.hskiem = models.hskiem;
+            dKho.dgkiem = models.dgkiem;
+            dKho.hscatdan = models.hscatdan;
+            dKho.dongiacatdan = models.dongiacatdan;
+            dKho.status = 0;
+            dKho.sdsoluongkg = models.sdsoluongkg;
+            dKho.sdsoluonghop = models.sdsoluonghop;
+            dKho.idcty = models.idcty;
+            dKho.luongthang = models.luongthang;
+            dKho.hscn = db.dHeSoKONs.FirstOrDefault(x => x.id == 1).heso;
             dKho.tienthoi = models.soluongkg * models.hsthoi * models.dongiathoi;
             dKho.tienkiem = slCaiNgayThuong * models.hskiem * models.dgkiem;
             dKho.tiencatdan = slCaiNgayThuong * models.hscatdan * models.dongiacatdan;
             dKho.sdtienthoi = models.sdsoluongkg * models.hsthoi * models.dongiathoi;
             dKho.sdtienkiem = slCaiCN * models.hskiem * models.dgkiem;
             dKho.sdtiencatdan = slCaiCN * models.hscatdan * models.dongiacatdan;
+            if (dKho.sdsoluongkg != 0 && dKho.sdsoluonghop != 0)
+            {
+                dKho.isSunDay = 1;
+            }
+            else
+            {
+                dKho.isSunDay = 0;
+            }
             return Json(
-                        new {
+                        new
+                        {
                             ssLstKhoSearch = ssLstKhoSearch,
                             Status = true,
                             masp = models.masp
                         }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult SaveDataDonGiaBQKho(MaterialModels models)
+        {
+            var db = new HRMContext();
+            db.dKhoes.AddRange(models.lstKho);
+            db.dDonGiaBQ.AddRange(models.lstDonGiaBQ);
+            db.SaveChanges();
+            return Json(
+                        new
+                        {
+
+                            Status = true,
+
+                        }, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
