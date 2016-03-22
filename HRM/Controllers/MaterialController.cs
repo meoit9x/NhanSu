@@ -60,8 +60,9 @@ namespace HRM.Controllers
             dKho.sdtiencatdan = slCaiCN * models.hscatdan * models.dongiacatdan;
             return Json(
                         new {
-                                ssLstKhoSearch = ssLstKhoSearch,
-                                Status = true
+                            ssLstKhoSearch = ssLstKhoSearch,
+                            Status = true,
+                            masp = models.masp
                         }, JsonRequestBehavior.AllowGet);
         }
 

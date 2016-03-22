@@ -89,18 +89,18 @@
         $(tr).append("<td>Ngày thường</td>");
         $(tr).append("<td>" + soluongkg + "</td>");
         $(tr).append("<td>" + soluonghop * sl_td + "</td>");
-        $(tr).append("<td>" + (item.tienthoi == null ? 0 : item.tienthoi) + "</td>");
-        $(tr).append("<td>" + (item.tienkiem == null ? 0 : item.tienkiem) + "</td>");
-        $(tr).append("<td>" + (item.tiencatdan == null ? 0 : item.tiencatdan) + "</td>");
+        $(tr).append("<td class='remove'>" + (item.tienthoi == null ? 0 : item.tienthoi) + "</td>");
+        $(tr).append("<td class='remove'>" + (item.tienkiem == null ? 0 : item.tienkiem) + "</td>");
+        $(tr).append("<td class='remove'>" + (item.tiencatdan == null ? 0 : item.tiencatdan) + "</td>");
         $("#smaterial tbody").append(tr);
 
         var tr = $("<tr id='ngaychunhat' data-detail='ngaychunhat'></tr>");
         $(tr).append("<td>Ngày chủ nhật</td>");
         $(tr).append("<td>" + sdsoluongkg + "</td>");
         $(tr).append("<td>" + sdsoluonghop * sl_td + "</td>");
-        $(tr).append("<td>" + (item.sdtienthoi == null ? 0 : item.sdtienthoi) + "</td>");
-        $(tr).append("<td>" + (item.sdtienkiem == null ? 0 : item.sdtienkiem) + "</td>");
-        $(tr).append("<td>" + (item.sdtiencatdan == null ? 0 : item.sdtiencatdan) + "</td>");
+        $(tr).append("<td class='remove'>" + (item.sdtienthoi == null ? 0 : item.sdtienthoi) + "</td>");
+        $(tr).append("<td class='remove'>" + (item.sdtienkiem == null ? 0 : item.sdtienkiem) + "</td>");
+        $(tr).append("<td class='remove'>" + (item.sdtiencatdan == null ? 0 : item.sdtiencatdan) + "</td>");
         $("#smaterial tbody").append(tr);
         
         
@@ -142,10 +142,22 @@
                     type: "POST",
                     success: function (result) {
                         if (result.Status == true) {
-
-
                             self.materials = null;
                             self.materials = result.ssLstKhoSearch;
+
+                            var maspRes = result.masp;
+                            var itemRes = self.materials.filter(function (itemRes) {
+                                return itemRes.masp == maspRes;
+                            })[0];
+                            $("#ngaythuong .remove").remove();
+                            $("#ngaychunhat .remove").remove();
+                            $("#ngaythuong").append("<td class='remove'>" + itemRes.tienthoi + "</td>");
+                            $("#ngaythuong").append("<td class='remove'>" + itemRes.tienkiem + "</td>");
+                            $("#ngaythuong").append("<td class='remove'>" + itemRes.tiencatdan + "</td>");
+                            
+                            $("#ngaychunhat").append("<td class='remove'>" + itemRes.sdtienthoi + "</td>");
+                            $("#ngaychunhat").append("<td class='remove'>" + itemRes.sdtienkiem + "</td>");
+                            $("#ngaychunhat").append("<td class='remove'>" + itemRes.sdtiencatdan + "</td>");
                         }
                     }
                 });
@@ -159,7 +171,7 @@
         $('#saveDepartment').click(function () {
             
             $("#material tbody").html("");
-            var i = 0;
+            var i = 1;
             self.materials.forEach(function (value) {
                 var tr = $("<tr  data-detail='" + value.masp + "'></tr>");
                 $(tr).append("<td>" + i + "</td>");

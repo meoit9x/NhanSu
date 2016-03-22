@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+@section Scripts{
+    <script src="~/App_Script/CoefficientUnstable.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var coefficientunstable = new CoefficientUnstable();
+            coefficientunstable.init();
+        });
+    </script>
+}
+<div class="table-responsive">
+    <div id="coefficient">
+        <div class="modal-body" style="padding:10px">
+            <div class="form-horizontal">
+                <div id="coefficientData" class="row">
+
+
+
+                    <div class="form-group">
+                        <div class="pull-right" style="margin-right:30px;">
+                            <input type="button" id="btnSaveSCoefficientUnstable" class="btn btn-primary" value="Lưu">
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg" id="coefficientUnstableModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+            </div>
+            <div class="modal-body" style="padding:10px">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label id="tenHeSo" class="col-md-4 control-label"></label>
+                                <div class="col-md-8">
+                                    <input type="text" value="" class="form-control" id="heSo">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="pull-right" style="margin-right:30px;">
+                                    <input type="button" id="btnSaveSMaterial" class="btn btn-primary" value="Lưu">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
