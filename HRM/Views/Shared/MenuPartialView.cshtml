@@ -34,7 +34,13 @@
                 <ul class="nav nav-second-level">
 
                     <li>
-                        @Html.ActionLink("Lương Sản Phẩm", "Index", "Material", null, new { @data_name = "Sản phẩm", @data_iframe = "Product" })
+                        @Html.ActionLink("Lương Sản Phẩm", "Index", "Material", null, new { @data_name = "Sản phẩm", @data_iframe = "Material" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Công việc khác", "Index", "OtherJobs", null, new { @data_name = "Công việc khác", @data_iframe = "OtherJobs" })
+                    </li>
+                    <li>
+                        @Html.ActionLink("Số lượng ca đêm", "Index", "NightShift", null, new { @data_name = "Số lượng ca đêm", @data_iframe = "NightShift" })
                     </li>
                 </ul>
             </li>

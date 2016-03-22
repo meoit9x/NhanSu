@@ -170,7 +170,9 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\NightShiftController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\OtherJobsController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SpecificationController.cs" />
@@ -331,6 +333,8 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\CoefficientUnstable\Index.cshtml" />
+    <Content Include="Views\OtherJobs\Index.cshtml" />
+    <Content Include="Views\NightShift\Index.cshtml" />
     <None Include="Web References\FirstReference\FirstService.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
