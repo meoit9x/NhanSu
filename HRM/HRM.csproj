@@ -226,6 +226,7 @@
     <Content Include="App_Script\Organization.js" />
     <Content Include="App_Script\Department.js" />
     <Content Include="App_Script\Material.js" />
+    <Content Include="App_Script\OtherJobs.js" />
     <Content Include="App_Script\UnitPrice.js" />
     <Content Include="App_Script\Specification.js" />
     <Content Include="App_Script\Menu.js" />

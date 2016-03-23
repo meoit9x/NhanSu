@@ -29,7 +29,7 @@
     var sumSLCai = 0;
     var sumDonGiaThoi = 0;
     $("#search").click(function () {
-
+        $("#material tbody").html("");
         from = $("#txtFrom").val();
         var to = $("#txtTo").val();
         var d = new Date();
@@ -60,9 +60,10 @@
                 type: "Get",
                 success: function (result) {
                     if (result.Status == true) {
-
+                        
                         var sl_cai = 0;
                         var i = 0;
+                        
                         result.data.forEach(function (value) {
                             var tr = $("<tr  data-detail='" + value.masp + "'></tr>");
                             $(tr).append("<td>" + (i + 1) + "</td>");

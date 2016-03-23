@@ -22,8 +22,15 @@ namespace HRM.Controllers
 
         public ActionResult Search(string from, string to, string code)
         {
+            var db = new HRMContext();
+            string firstOD = HRM.Unit.Unit.FirstDayOfMonth(Convert.ToInt32(from), Convert.ToInt32(to));
+            List<dKho> listKhoSearch = db.dKhoes.Where(x => x.luongthang == firstOD && x.idcty == code).ToList();
+            if(listKhoSearch.Count()>0)
+            {
+                return Json(new { data = listKhoSearch, Status = true }, JsonRequestBehavior.AllowGet);
+            }
             FirstService s = new FirstService();
-            List<DataResult> list = s.GetData(HRM.Unit.Unit.FirstDayOfMonth(Convert.ToInt32(from), Convert.ToInt32(to)), HRM.Unit.Unit.LastDayOfMOnth(Convert.ToInt32(from), Convert.ToInt32(to)), code).ToList();
+            List<DataResult> list = s.GetData(firstOD, HRM.Unit.Unit.LastDayOfMOnth(Convert.ToInt32(from), Convert.ToInt32(to)), code).ToList();
             
             foreach (var objResult in list)
             {
@@ -35,7 +42,8 @@ namespace HRM.Controllers
                 objKho.sdsoluongkg = Convert.ToDouble(objResult.kho_sunday.so_luong == null ? 0 : objResult.kho_sunday.so_luong);
                 objKho.soluonghop = Convert.ToDouble(objResult.kho.sl_hop == null ? 0 : objResult.kho.sl_hop);
                 objKho.soluongkg = Convert.ToDouble(objResult.kho.so_luong == null ? 0 : objResult.kho.so_luong);
-                
+                objKho.luongthang = firstOD;
+                objKho.idcty = code;
                 listKhoSearch.Add(objKho);
             }
             return Json(new { data = listKhoSearch, Status = true }, JsonRequestBehavior.AllowGet);
@@ -55,7 +63,7 @@ namespace HRM.Controllers
             donGiaBQNgayThuong.tongtienthoi = (from kho in lKho select Convert.ToDouble(kho.tienthoi == null ? 0 : kho.tiencatdan)).Sum();
             donGiaBQNgayThuong.tongtienkiem = (from kho in lKho select Convert.ToDouble(kho.tienkiem == null ? 0 : kho.tiencatdan)).Sum();
             donGiaBQNgayThuong.tongtiencatdan = (from kho in lKho select Convert.ToDouble(kho.tiencatdan == null ? 0 : kho.tiencatdan)).Sum();
-            donGiaBQNgayThuong.slkg = (from kho in lKho select Convert.ToDouble(kho.soluongkg == null ? 0 : kho.tiencatdan)).Sum();
+            donGiaBQNgayThuong.slkg = (from kho in lKho select Convert.ToDouble(kho.soluongkg == null ? 0 : kho.soluongkg)).Sum();
             donGiaBQNgayThuong.slcai = (from kho in lKho select Convert.ToDouble(kho.soluonghop.GetValueOrDefault(0)*kho.sl_td.GetValueOrDefault(0))).Sum();
             donGiaBQNgayThuong.isSunDay = 0;
             donGiaBQNgayThuong.idcty = models.idcty;
@@ -122,7 +130,7 @@ namespace HRM.Controllers
             dKho.sdsoluongkg = models.sdsoluongkg;
             dKho.sdsoluonghop = models.sdsoluonghop;
             dKho.idcty = models.idcty;
-            dKho.luongthang = models.luongthang;
+           
             dKho.hscn = db.dHeSoKONs.FirstOrDefault(x => x.id == 1).heso;
             dKho.tienthoi = models.soluongkg * models.hsthoi * models.dongiathoi;
             dKho.tienkiem = slCaiNgayThuong * models.hskiem * models.dgkiem;
@@ -147,13 +155,25 @@ namespace HRM.Controllers
                         }, JsonRequestBehavior.AllowGet);
         }
 
+        public List<dDonGiaBQ> SaveDataSum(string luongthang, string code)
+        {
+            var db = new HRMContext();
+            var ldgbq = (from dgbq in db.dDonGiaBQ where dgbq.luongthang == luongthang where dgbq.idcty == code select dgbq).ToList();
+
+            return ldgbq;
+        }
+
         [HttpPost]
         public ActionResult SaveDataDonGiaBQKho(MaterialModels models)
         {
             var db = new HRMContext();
-            db.dKhoes.AddRange(models.lstKho);
-            db.dDonGiaBQ.AddRange(models.lstDonGiaBQ);
-            db.SaveChanges();
+            if (models.lstKho[0].id != 0) ;
+            else
+            {
+                db.dKhoes.AddRange(models.lstKho);
+                db.dDonGiaBQ.AddRange(models.lstDonGiaBQ);
+                db.SaveChanges();
+            }
             return Json(
                         new
                         {
