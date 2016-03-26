@@ -79,7 +79,7 @@
                     {
                         $("#nhapSL").html("");
                         var lblSoLuong = $("<label class='col-md-4 control-label'>Số lượng:</label>");
-                        var nhapSL = $('<select class="form-control col-md-4" id="sel1" style="width:initial;margin-left:15px;">');
+                        var nhapSL = $('<select class="form-control col-md-4" id="sel1" onchange="myFunction()" style="width:initial;margin-left:15px;">');
                         nhapSL.append('<option value="1">Số lượng KG</option>');
                         nhapSL.append('<option value="2">Số lượng cái</option>');
                         nhapSL.append('<option value="nhap">Nhập</option>');
@@ -91,7 +91,7 @@
                     {
                         $("#nhapSL").html("");
                         var lblSoLuong = $("<label class='col-md-4 control-label'>Số lượng:</label>");
-                        var nhapSL = $('<select class="form-control col-md-4" id="sel1" style="width:initial;margin-left:15px;">');
+                        var nhapSL = $('<select class="form-control col-md-4" id="sel1" onchange="myFunction()" style="width:initial;margin-left:15px;">');
                         nhapSL.append('<option value="1">Số lượng KG</option>');
                         nhapSL.append('<option value="2">Số lượng cái</option>');
                         nhapSL.append('<option value="nhap">Nhập</option>');
@@ -104,7 +104,7 @@
                         $("#nhapSL").html("");
                         var lblSoLuong = $("<label class='col-md-4 control-label'>Số lượng:</label>");
                         var nhapSL = $("<div class='col-md-4'></div>");
-                        nhapSL.append("<input type='text' class='form-control txtSoLuong' id='soLuong' value='" + result.data.soluong + "'>");
+                        nhapSL.append("<input type='text' class='form-control txtSoLuong'  id='soLuong' value='" + result.data.soluong + "'>");
 
                         $("#nhapSL").html(lblSoLuong);
                         $("#nhapSL").append(nhapSL);
