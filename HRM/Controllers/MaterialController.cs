@@ -158,7 +158,7 @@ namespace HRM.Controllers
         public List<dDonGiaBQ> SaveDataSum(string luongthang, string code)
         {
             var db = new HRMContext();
-            var ldgbq = (from dgbq in db.dDonGiaBQ where dgbq.luongthang == luongthang where dgbq.idcty == code select dgbq).ToList();
+            var ldgbq = (from dgbq in db.dDonGiaBQs where dgbq.luongthang == luongthang where dgbq.idcty == code select dgbq).ToList();
 
             return ldgbq;
         }
@@ -171,7 +171,7 @@ namespace HRM.Controllers
             else
             {
                 db.dKhoes.AddRange(models.lstKho);
-                db.dDonGiaBQ.AddRange(models.lstDonGiaBQ);
+                db.dDonGiaBQs.AddRange(models.lstDonGiaBQ);
                 db.SaveChanges();
             }
             return Json(

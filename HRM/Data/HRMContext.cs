@@ -27,7 +27,8 @@ namespace HRM.Data
         public virtual DbSet<dQuyCach> dQuyCaches { get; set; }
         public virtual DbSet<dQuyCachCT> dQuyCachCTs { get; set; }
         public virtual DbSet<dSanPham> dSanPhams { get; set; }
-        public virtual DbSet<dDonGiaBQ> dDonGiaBQ { get; set; }
+        public virtual DbSet<dDonGiaBQ> dDonGiaBQs { get; set; }
+        public virtual DbSet<dCongViecKhac> dCongViecKhacs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<dBoPhan>()

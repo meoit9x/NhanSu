@@ -79,7 +79,7 @@
         $("#organizationModal").modal('show');
     });
 
-    
+
 
     // nút lưu
     $('#saveOrganization').click(function () {
@@ -124,7 +124,7 @@
         }
     });
 
-   
+
 
     // ấn nút xóa trong bảng
     $("#deleteOrganization").click(function (e) {
